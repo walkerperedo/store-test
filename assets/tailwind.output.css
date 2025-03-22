@@ -294,6 +294,9 @@
   .items-start {
     align-items: flex-start;
   }
+  .justify-end {
+    justify-content: flex-end;
+  }
   .gap-y-8 {
     row-gap: calc(var(--spacing) * 8);
   }

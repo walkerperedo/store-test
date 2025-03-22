@@ -142,23 +142,13 @@
             </a>
           </p>
 
-          {%- if settings.card_show_subtitle -%}
-            <p class="card__subtitle text-sm text-current mb-1{% unless settings.show_dividers %} mt-1{% endunless %}">
-              {{ product.metafields.descriptors.subtitle }}
-            </p>
-          {%- endif -%}
-
-          {%- if product.metafields.reviews.rating.value != blank and settings.card_show_rating -%}
+          {%- if section.settings.card_show_rating -%}
             <div>
               {% render 'rating',
-                rating_value: product.metafields.reviews.rating.value,
-                rating_count: product.metafields.reviews.rating_count
+                rating_value: 4.5,
+                rating_count: 500
               %}
             </div>
-          {%- endif -%}
-
-          {%- if settings.card_price_bottom == false -%}
-            {%- render 'price', product: product, class: 'price--top' -%}
           {%- endif -%}
 
           {%- if settings.card_colors_style != 'none' -%}
@@ -283,59 +273,13 @@
             -%}
           {%- endif -%}
 
-          {%- if settings.card_price_bottom -%}
+          {%- if section.settings.show_price == true -%}
             <div class="flex grow items-end">
               {%- render 'price', product: product, class: 'price--bottom' -%}
             </div>
           {%- endif -%}
         </div>
       </div>
-
-      {%- if settings.enable_quick_add and disable_quickbuy != true -%}
-        <div
-          class="
-            card__quick-add
-            {%- if settings.card_atc_mobile == "text_button_bottom" %}mob:card__quick-add--below{%- endif %}
-            {%- if settings.card_atc_mobile == "icon" %}mob:card__quick-add--icon{%- endif %}
-            {%- if settings.card_atc_desktop == "text_button_bottom" %}desktop:card__quick-add--below{%- endif %}
-            {%- if settings.card_atc_desktop == "icon" %}desktop:card__quick-add--icon{%- endif %}
-          "
-        >
-          <div class="no-js-hidden">
-            <button
-              type="button"
-              class="btn btn--primary w-full js-quick-add"
-              aria-haspopup="dialog"
-              data-product-url="{{ product_url }}"
-              data-product-default-variant="{{ product.has_only_default_variant }}"
-              {% if selected_color %}
-                data-selected-color="{{ selected_color }}"
-              {% endif %}
-            >
-              <span class="quick-add-btn-icon block pointer-events-none">
-                <span class="visually-hidden">{{- 'products.product.choose_options' | t -}}</span>
-                <span class="quick-add-btn-icon">
-                  <svg
-                    width="21"
-                    height="21"
-                    viewBox="0 0 21 21"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M10.25 7.75V4.75H7.25V3.25H10.25V0.25H11.75V3.25H14.75V4.75H11.75V7.75H10.25ZM6.15375 20.5578C5.66792 20.5578 5.25483 20.3875 4.9145 20.047C4.57417 19.7067 4.404 19.2936 4.404 18.8078C4.404 18.3218 4.57417 17.9086 4.9145 17.5683C5.25483 17.2279 5.66792 17.0578 6.15375 17.0578C6.63975 17.0578 7.05292 17.2279 7.39325 17.5683C7.73358 17.9086 7.90375 18.3218 7.90375 18.8078C7.90375 19.2936 7.73358 19.7067 7.39325 20.047C7.05292 20.3875 6.63975 20.5578 6.15375 20.5578ZM15.8462 20.5578C15.3602 20.5578 14.9471 20.3875 14.6068 20.047C14.2664 19.7067 14.0962 19.2936 14.0962 18.8078C14.0962 18.3218 14.2664 17.9086 14.6068 17.5683C14.9471 17.2279 15.3602 17.0578 15.8462 17.0578C16.3321 17.0578 16.7452 17.2279 17.0855 17.5683C17.4258 17.9086 17.596 18.3218 17.596 18.8078C17.596 19.2936 17.4258 19.7067 17.0855 20.047C16.7452 20.3875 16.3321 20.5578 15.8462 20.5578ZM0.5 2.75V1.25H3.3615L7.5345 10.0577H14.352C14.4097 10.0577 14.4609 10.0433 14.5057 10.0145C14.5506 9.98567 14.5891 9.94558 14.6212 9.89425L18.3193 3.25H20.0268L15.9345 10.6423C15.7705 10.9307 15.5534 11.1554 15.2833 11.3162C15.0131 11.4773 14.7174 11.5577 14.3962 11.5577H7.1L5.94225 13.673C5.89092 13.75 5.88933 13.8333 5.9375 13.923C5.9855 14.0128 6.05758 14.0577 6.15375 14.0577H17.596V15.5577H6.15375C5.48708 15.5577 4.98358 15.2727 4.64325 14.7028C4.30292 14.1329 4.29367 13.5563 4.6155 12.973L6.04225 10.4078L2.404 2.75H0.5Z" fill="currentColor"/>
-                  </svg>
-                </span>
-              </span>
-              <span class="quick-add-btn-text block pointer-events-none">
-                {{- 'products.product.choose_options' | t -}}
-              </span>
-            </button>
-            <a href="{{ product_url }}" class="btn btn--secondary quick-add-view-btn">
-              {{- 'products.product.view_details' | t -}}
-            </a>
-          </div>
-        </div>
-      {%- endif -%}
     </div>
   </product-card>
 {%- else -%}
