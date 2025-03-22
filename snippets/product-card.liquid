@@ -23,7 +23,7 @@
 
   assign current_variant = product.selected_or_first_available_variant
   assign product_images = product.media | where: 'media_type', 'image'
-  assign show_hover_image = false
+  assign show_hover_image = true
 
   if image_ratio == null
     if settings.prod_card_image_ratio == 'shortest' or settings.prod_card_image_ratio == 'tallest'
@@ -68,9 +68,6 @@
   endif
 
   assign image_quality = 1
-  if product.featured_media.preview_image.aspect_ratio > 1 and settings.prod_card_image_ratio != '1.77' and settings.prod_card_image_fit == 'cover'
-    assign image_quality = 2
-  endif
 -%}
 <script src="{{ 'product-card.js' | asset_url }}" defer="defer"></script>
 
@@ -81,10 +78,22 @@
         href="{{ product_url }}"
         aria-label="{{ product.title | escape }}"
         class="media block js-prod-link"
+        style="padding-top: 100%"
         tabindex="-1"
       >
         {%- if product.featured_media -%}
-            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" width="50" height="80">
+        {%- capture attributes %}data-media-id="{{ product.featured_media.id }}"{% endcapture -%}
+          {% render 'image',
+              image: product.featured_media.preview_image,
+              widths: '320, 460, 600, 700, 800, 900, 1200',
+              src_width: 460,
+              src_placeholder: true,
+              sizes: sizes,
+              class: class,
+              attributes: attributes,
+              disable_focal_point: true,
+              quality: image_quality
+            %}
         {%- else -%}
           {{ 'image' | placeholder_svg_tag: 'media__placeholder img-fit' }}
         {%- endif -%}

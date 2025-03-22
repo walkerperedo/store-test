@@ -138,7 +138,7 @@
 
 <div class="section">
   {%- if section.settings.title != blank or section.settings.show_view_all -%}
-    <div class="container relative">
+    <div class="relative">
       <div
         class="section__header items-center flex{% if section.settings.heading_align == 'text-center' %} flex-col text-center{% elsif section.settings.heading_align == 'text-end' %} flex-row-reverse flex-wrap{% else %} flex-row flex-wrap{% endif %} gap-x-theme"
         {% if settings.animations_enabled != 'disabled' %}
@@ -191,11 +191,11 @@
         disable-desktop="true"
       {% endif %}
     >
-      <div class="{% unless section.settings.show_promo_info %}container relative{% endunless %} featured-collection-products">
+      <div class="{% unless section.settings.show_promo_info %} relative{% endunless %} featured-collection-products">
         <div class="slider" id="slider-{{ section.id }}">
   {%- endif -%}
 
-  <div class="container products-grid-container shrink-0">
+  <div class="products-grid-container shrink-0">
     <ul
       class="{% if carousel %}slider__grid {% endif %}grid {{ grid_classes }}{% if section.settings.layout == 'carousel_on_mobile' and section.settings.card_size_mobile == 'small' and settings.card_contain %} sm:gap-x-theme sm:gap-y-8{% else %} gap-x-theme gap-y-8{% endif %}{% if section.settings.card_size_mobile == 'small' and settings.card_contain %} small__grid{% endif %}"
       role="list"
@@ -379,121 +379,6 @@
       "max": 24,
       "step": 1,
       "default": 8
-    },
-    {
-      "type": "header",
-      "content": "Promotion card"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_promo_info",
-      "label": "Show promotion",
-      "default": false
-    },
-    {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Image"
-    },
-    {
-      "type": "select",
-      "id": "image_ratio",
-      "label": "Image aspect ratio",
-      "options": [
-        {
-          "value": "natural",
-          "label": "Natural"
-        },
-        {
-          "value": "fill",
-          "label": "Fill"
-        },
-        {
-          "value": "1.77",
-          "label": "Landscape"
-        },
-        {
-          "value": "1",
-          "label": "Square"
-        },
-        {
-          "value": "0.75",
-          "label": "Portrait"
-        }
-      ],
-      "default": "fill"
-    },
-    {
-      "type": "text",
-      "id": "promo_title",
-      "label": "Title",
-      "default": "A headline to grab attention"
-    },
-    {
-      "type": "richtext",
-      "id": "content",
-      "default": "<p>Use this card with an image to highlight your collections or introduce a promotion.</p>",
-      "label": "Text"
-    },
-    {
-      "type": "url",
-      "id": "link_url",
-      "label": "URL"
-    },
-    {
-      "type": "text",
-      "id": "button_label",
-      "label": "Button label",
-      "default": "Button",
-      "info": "The button will link to the URL specified above."
-    },
-    {
-      "type": "header",
-      "content": "Style"
-    },
-    {
-      "type": "select",
-      "id": "color_scheme",
-      "label": "Promotion card color scheme",
-      "options": [
-        {
-          "value": "none",
-          "label": "Default"
-        },
-        {
-          "value": "1",
-          "label": "Scheme 1"
-        },
-        {
-          "value": "2",
-          "label": "Scheme 2"
-        },
-        {
-          "value": "3",
-          "label": "Scheme 3"
-        }
-      ],
-      "default": "2"
-    },
-    {
-      "type": "select",
-      "id": "button_style",
-      "label": "Promotion card button",
-      "options": [
-        {
-          "value": "link",
-          "label": "Link"
-        },
-        {
-          "value": "btn btn--primary",
-          "label": "Primary button"
-        },
-        {
-          "value": "btn btn--secondary",
-          "label": "Secondary button"
-        }
-      ],
-      "default": "btn btn--primary"
     }
   ],
   "presets": [
