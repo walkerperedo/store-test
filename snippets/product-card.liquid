@@ -86,6 +86,12 @@
 
 {%- if product and product != empty -%}
   <product-card class="card card--product{{ card_class }} h-full{% if settings.card_contain %} card--product-contained{% endif %}{% unless settings.show_dividers %} card--no-lines{% endunless %}{% if show_compare %} card--product-compare{% endif %} relative flex">
+    
+    {%- liquid
+      if settings.product_label_card_position != 'none'
+        render 'product-label', product: product, position: settings.product_label_card_position, is_product_card: true, limit: 2, custom_text: "Best Seller"
+      endif
+    -%}
     <div class="img-container card__media{% if show_hover_image %} has-hover-image{% endif %}">
       <a
         href="{{ product_url }}"

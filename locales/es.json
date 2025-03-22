@@ -118,6 +118,8 @@
       "description": "Descripción",
       "on_sale": "Oferta",
       "product_variants": "Variantes de producto",
+      "percent_reduction": "{{ amount }}% off",
+      "percent_reduction_up_to": "Save {{ amount }}%",
       "quantity": {
         "label": "Cantidad",
         "input_label": "Cantidad para {{ product }}",

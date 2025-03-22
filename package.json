@@ -23,5 +23,8 @@
     "url": "https://github.com/walkerperedo/platter-interview/issues"
   },
   "homepage": "https://github.com/walkerperedo/platter-interview#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "prueba-tecnica": "file:"
+  }
 }
