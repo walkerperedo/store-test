@@ -1,0 +1,341 @@
+{%- comment -%}theme-check-disable LiquidTag{%- endcomment -%}
+{%- comment -%}
+  Parameters:
+  - product {Object} - Product object.
+  - collection {Object} - Collection object (optional).
+  - image_ratio {Number} - Aspect ratio for the image(s).
+  - disable_quickbuy {Boolean} - Force disables quickbuy (even if enabled in settings)
+
+  Usage:
+  {% render 'product-card', product: product %}
+{%- endcomment -%}
+
+{%- liquid
+  if collection and settings.card_url_within_coll and product.collections contains collection
+    assign product_url = product.url | within: collection
+  else
+    assign product_url = product.url
+  endif
+
+  if product_url contains '?'
+    assign product_url = product_url | split: '?' | first
+  endif
+
+  assign current_variant = product.selected_or_first_available_variant
+  assign product_images = product.media | where: 'media_type', 'image'
+  assign show_hover_image = false
+
+  if image_ratio == null
+    if settings.prod_card_image_ratio == 'shortest' or settings.prod_card_image_ratio == 'tallest'
+      assign image_ratio = 1
+    else
+      assign image_ratio = settings.prod_card_image_ratio
+    endif
+  elsif image_ratio == 0 or image_ratio == 99
+    assign image_ratio = 1
+  endif
+
+  if section.settings.card_size == 'small'
+    assign swatch_limit = 4
+  else
+    assign swatch_limit = 7
+  endif
+
+  if product.featured_media
+    if section.settings.card_size == 'small'
+      capture sizes
+        render 'sizes-attribute', grid: true, min: 2, sm: 3, md: 4, xl: 5
+      endcapture
+    elsif section.settings.card_size == 'large'
+      capture sizes
+        render 'sizes-attribute', grid: true, min: 1, sm: 2, xl: 3
+      endcapture
+    else
+      capture sizes
+        render 'sizes-attribute', grid: true, min: 1, sm: 3, md: 4
+      endcapture
+    endif
+
+    if settings.prod_card_image_fit == 'contain'
+      assign class = 'img-fit img-fit--contain card__main-image'
+    else
+      assign class = 'img-fit card__main-image ' | append: settings.prod_card_image_align
+    endif
+
+    if product.featured_media.preview_image == product_images.last
+      assign show_hover_image = false
+    endif
+  endif
+
+  assign image_quality = 1
+  if product.featured_media.preview_image.aspect_ratio > 1 and settings.prod_card_image_ratio != '1.77' and settings.prod_card_image_fit == 'cover'
+    assign image_quality = 2
+  endif
+-%}
+<script src="{{ 'product-card.js' | asset_url }}" defer="defer"></script>
+
+{%- if product and product != empty -%}
+  <product-card class="card card--product{{ card_class }} h-full{% if settings.card_contain %} card--product-contained{% endif %}{% unless settings.show_dividers %} card--no-lines{% endunless %}{% if show_compare %} card--product-compare{% endif %} relative flex">
+    <div class="img-container">
+      <a
+        href="{{ product_url }}"
+        aria-label="{{ product.title | escape }}"
+        class="media block js-prod-link"
+        tabindex="-1"
+      >
+        {%- if product.featured_media -%}
+            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" width="50" height="80">
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'media__placeholder img-fit' }}
+        {%- endif -%}
+      </a>
+    </div>
+
+    <div class="card__info-container flex flex-col flex-auto relative">
+      <div class="card__info w-full">
+        <div class="card__info-inner{% if settings.card_price_bottom %} flex flex-col h-full{% else %} inline-block{% endif %} w-full">
+          {%- if settings.card_show_vendor -%}
+            <p class="card__vendor{% if settings.show_dividers %} mb-1{% else %} mb-0{% endif %} text-sm text-theme-light">
+              {{- product.vendor -}}
+            </p>
+          {%- endif -%}
+
+          <p class="card__title font-bold{% if settings.show_dividers %} mb-1{% else %} mt-1 mb-0{% endif %}">
+            <a href="{{ product_url }}" class="card-link text-current js-prod-link">
+              {{- product.title | escape -}}
+            </a>
+          </p>
+
+          {%- if settings.card_show_subtitle -%}
+            <p class="card__subtitle text-sm text-current mb-1{% unless settings.show_dividers %} mt-1{% endunless %}">
+              {{ product.metafields.descriptors.subtitle }}
+            </p>
+          {%- endif -%}
+
+          {%- if product.metafields.reviews.rating.value != blank and settings.card_show_rating -%}
+            <div>
+              {% render 'rating',
+                rating_value: product.metafields.reviews.rating.value,
+                rating_count: product.metafields.reviews.rating_count
+              %}
+            </div>
+          {%- endif -%}
+
+          {%- if settings.card_price_bottom == false -%}
+            {%- render 'price', product: product, class: 'price--top' -%}
+          {%- endif -%}
+
+          {%- if settings.card_colors_style != 'none' -%}
+            {%- for option in product.options_with_values -%}
+              {%- if settings.swatch_option_name contains option.name -%}
+                {%- if settings.card_colors_style == 'swatches' or settings.card_colors_style == 'variant-images' -%}
+                  {%- liquid
+                    assign swatch_size = settings.card_swatch_size | times: 2
+                    if settings.image_quality == 0.75
+                      assign swatch_size = settings.card_swatch_size
+                    endif
+                  -%}
+                  <div class="card__swatches{% if settings.show_dividers %} mt-3 border-top{% else %} mt-2 pb-1{% endif %} pt-3 flex items-start relative">
+                    {%- capture option_id %}{{ section.id }}-{{ product.id }}-{{ option.name | handle }}{% endcapture -%}
+                    {%- assign variant_key = 'option' | append: option.position -%}
+
+                    {%- for value in option.values limit: swatch_limit -%}
+                      {%- liquid
+                        assign variant_value = product.variants | where: variant_key, value | first
+                        if option.selected_value == value
+                          assign selected_color = value
+                        endif
+                      -%}
+                      <input
+                        type="radio"
+                        class="opt-btn visually-hidden js-option"
+                        name="{{ option_id }}-option"
+                        id="{{ option_id }}-opt-{{ forloop.index0 }}"
+                        value="{{ value | escape }}"
+                        data-variant-id="{{ variant_value.id }}"
+                        {% if variant_value.featured_media %}
+                          data-media-id="{{ variant_value.featured_media.id }}"
+                        {% endif -%}
+                        {% if option.selected_value == value %}
+                          checked
+                        {% endif %}
+                      >
+                      <label
+                        class="opt-label opt-label--swatch relative swatch-shape--{{ settings.card_swatch_shape }}{% if settings.card_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}{% if settings.card_colors_style == 'variant-images' and variant_value.featured_media %} swatch--variant-image{% endif %}"
+                        title="{{ value | replace: '"', '`' }}"
+                        data-swatch="{% if settings.card_colors_style != 'variant-images' or variant_value.featured_media == blank %}{{ value | replace: '"', '' | downcase }}{% endif %}"
+                        for="{{ option_id }}-opt-{{ forloop.index0 }}"
+                      >
+                        {%- if settings.card_colors_style == 'variant-images' and variant_value.featured_media -%}
+                          {%- if settings.card_swatch_shape == 'natural' -%}
+                            <img
+                              loading="lazy"
+                              class="bg-theme-bg"
+                              src="{{ variant_value.featured_media.preview_image | image_url: width: swatch_size }}"
+                              height="{{ swatch_size | divided_by: variant_value.featured_media.preview_image.aspect_ratio | round }}"
+                              width="{{ swatch_size }}"
+                              alt="{{ variant_value.featured_media.preview_image.alt | escape }}"
+                            >
+                          {%- else -%}
+                            <img
+                              loading="lazy"
+                              class="img-fit bg-theme-bg"
+                              src="{{ variant_value.featured_media.preview_image | image_url: width: swatch_size, height: swatch_size, crop: 'center' }}"
+                              height="{{ swatch_size }}"
+                              width="{{ swatch_size }}"
+                              alt="{{ variant_value.featured_media.preview_image.alt | escape }}"
+                            >
+                          {%- endif -%}
+                        {%- endif -%}
+                        <span class="visually-hidden">{{ value }}</span>
+                      </label>
+                    {%- endfor -%}
+
+                    {%- if option.values.size > swatch_limit -%}
+                      <span class="self-center text-end text-sm">+{{ option.values.size | minus: swatch_limit }}</span>
+                    {%- endif -%}
+                  </div>
+                {%- else -%}
+                  {%- if option.values.size == 1 -%}
+                    <p class="mt-2">{{ 'sections.collection.colors_single' | t }}</p>
+                  {%- else -%}
+                    <p class="mt-2">{{ 'sections.collection.colors_count' | t: count: option.values.size }}</p>
+                  {%- endif -%}
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+
+          {%- if settings.card_show_inventory and current_variant.inventory_management != blank -%}
+            {%- liquid
+              assign total = 0
+              assign inventory_policy = ''
+              for variant in product.variants
+                if variant.inventory_quantity > 0
+                  assign total = total | plus: variant.inventory_quantity
+                endif
+                if variant.inventory_policy == 'continue'
+                  assign inventory_policy = 'continue'
+                endif
+              endfor
+
+              if total <= 0
+                if inventory_policy == 'continue'
+                  if settings.hide_no_stock_backordered
+                    assign inventory_level = 'hide'
+                  else
+                    assign inventory_level = 'backordered'
+                  endif
+                elsif product.available
+                  assign inventory_level = 'in_stock'
+                else
+                  assign inventory_level = 'hide'
+                endif
+              elsif total <= settings.inventory_threshold_very_low
+                assign inventory_level = 'very_low'
+              elsif total <= settings.inventory_threshold_low
+                assign inventory_level = 'low'
+              else
+                assign inventory_level = 'normal'
+              endif
+
+              if inventory_level == 'normal' or inventory_level == 'in_stock'
+                if settings.inventory_show_notice == 'low'
+                  assign inventory_level = 'hide'
+                endif
+              endif
+            -%}
+          {%- endif -%}
+
+          {%- if settings.card_price_bottom -%}
+            <div class="flex grow items-end">
+              {%- render 'price', product: product, class: 'price--bottom' -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- if settings.enable_quick_add and disable_quickbuy != true -%}
+        <div
+          class="
+            card__quick-add
+            {%- if settings.card_atc_mobile == "text_button_bottom" %}mob:card__quick-add--below{%- endif %}
+            {%- if settings.card_atc_mobile == "icon" %}mob:card__quick-add--icon{%- endif %}
+            {%- if settings.card_atc_desktop == "text_button_bottom" %}desktop:card__quick-add--below{%- endif %}
+            {%- if settings.card_atc_desktop == "icon" %}desktop:card__quick-add--icon{%- endif %}
+          "
+        >
+          <div class="no-js-hidden">
+            <button
+              type="button"
+              class="btn btn--primary w-full js-quick-add"
+              aria-haspopup="dialog"
+              data-product-url="{{ product_url }}"
+              data-product-default-variant="{{ product.has_only_default_variant }}"
+              {% if selected_color %}
+                data-selected-color="{{ selected_color }}"
+              {% endif %}
+            >
+              <span class="quick-add-btn-icon block pointer-events-none">
+                <span class="visually-hidden">{{- 'products.product.choose_options' | t -}}</span>
+                <span class="quick-add-btn-icon">
+                  <svg
+                    width="21"
+                    height="21"
+                    viewBox="0 0 21 21"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M10.25 7.75V4.75H7.25V3.25H10.25V0.25H11.75V3.25H14.75V4.75H11.75V7.75H10.25ZM6.15375 20.5578C5.66792 20.5578 5.25483 20.3875 4.9145 20.047C4.57417 19.7067 4.404 19.2936 4.404 18.8078C4.404 18.3218 4.57417 17.9086 4.9145 17.5683C5.25483 17.2279 5.66792 17.0578 6.15375 17.0578C6.63975 17.0578 7.05292 17.2279 7.39325 17.5683C7.73358 17.9086 7.90375 18.3218 7.90375 18.8078C7.90375 19.2936 7.73358 19.7067 7.39325 20.047C7.05292 20.3875 6.63975 20.5578 6.15375 20.5578ZM15.8462 20.5578C15.3602 20.5578 14.9471 20.3875 14.6068 20.047C14.2664 19.7067 14.0962 19.2936 14.0962 18.8078C14.0962 18.3218 14.2664 17.9086 14.6068 17.5683C14.9471 17.2279 15.3602 17.0578 15.8462 17.0578C16.3321 17.0578 16.7452 17.2279 17.0855 17.5683C17.4258 17.9086 17.596 18.3218 17.596 18.8078C17.596 19.2936 17.4258 19.7067 17.0855 20.047C16.7452 20.3875 16.3321 20.5578 15.8462 20.5578ZM0.5 2.75V1.25H3.3615L7.5345 10.0577H14.352C14.4097 10.0577 14.4609 10.0433 14.5057 10.0145C14.5506 9.98567 14.5891 9.94558 14.6212 9.89425L18.3193 3.25H20.0268L15.9345 10.6423C15.7705 10.9307 15.5534 11.1554 15.2833 11.3162C15.0131 11.4773 14.7174 11.5577 14.3962 11.5577H7.1L5.94225 13.673C5.89092 13.75 5.88933 13.8333 5.9375 13.923C5.9855 14.0128 6.05758 14.0577 6.15375 14.0577H17.596V15.5577H6.15375C5.48708 15.5577 4.98358 15.2727 4.64325 14.7028C4.30292 14.1329 4.29367 13.5563 4.6155 12.973L6.04225 10.4078L2.404 2.75H0.5Z" fill="currentColor"/>
+                  </svg>
+                </span>
+              </span>
+              <span class="quick-add-btn-text block pointer-events-none">
+                {{- 'products.product.choose_options' | t -}}
+              </span>
+            </button>
+            <a href="{{ product_url }}" class="btn btn--secondary quick-add-view-btn">
+              {{- 'products.product.view_details' | t -}}
+            </a>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </product-card>
+{%- else -%}
+  <div class="card">
+    <div class="card__media">
+      <div class="media relative" style="padding-top: {{ 1 | divided_by: image_ratio | times: 100 }}%;">
+        {%- capture placeholder_name -%}product-{{ 'now' | date: '%N' | modulo: 6 | plus: 1 }}{%- endcapture -%}
+        {{ placeholder_name | placeholder_svg_tag: 'media__placeholder img-fit' }}
+      </div>
+    </div>
+    <div class="card__info">
+      <p class="card__title font-bold">{{ 'onboarding.product.title' | t }}</p>
+      <div class="card__price theme-money">
+        {%- render 'price-as-money', price: 1234 -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+<script>
+  {% comment %} document.addEventListener('DOMContentLoaded', function () {
+    if (window.customerData) {
+      const customerTags = JSON.parse(window.customerData.tags.replace(/&quot;/g, '"')); //.split(',');
+
+      // Lógica para mostrar o usar los tags en el product card
+      {% comment %} console.log(customerTags); {% endcomment %}
+
+      // Ejemplo: mostrar tags en el elemento del producto
+      const productCard = document.querySelector('.product-card');
+      if (productCard) {
+        customerTags.forEach((tag) => {
+          const tagElement = document.createElement('span');
+          tagElement.textContent = tag.trim();
+          productCard.appendChild(tagElement);
+        });
+      }
+    }
+  }); {% endcomment %}
+</script>

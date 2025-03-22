@@ -290,6 +290,20 @@
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+    <script>
+      window.theme = {
+        mediaQueries: {
+          sm: '(min-width: 600px)',
+          md: '(min-width: 769px)',
+          customLg: '(min-width: 1024px)',
+          lg: '(min-width: 1025px)',
+          xl: '(min-width: 1280px)',
+          xxl: '(min-width: 1536px)',
+          portrait: '(orientation: portrait)'
+        },
+      };
+
+    </script>
   <!-- subify Snippet Start -->
 {% if content_for_header contains 'https:\/\/app-subify.shopgram.app\/subify-script-tag-for-snippet.js' %} 
 

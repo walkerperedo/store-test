@@ -37,6 +37,7 @@
         "tiktok": "TikTok"
       }
     },
+    
     "continue_shopping": "Continue shopping",
     "pagination": {
       "label": "Pagination",
@@ -59,8 +60,8 @@
     },
     "slider": {
       "of": "of",
-      "next_slide": "Slide right",
-      "previous_slide": "Slide left",
+      "next": "Slide right",
+      "previous": "Slide left",
       "name": "Slider"
     }
   },
@@ -108,11 +109,14 @@
     }
   },
   "onboarding": {
-    "product_title": "Example product title",
+    "product": {
+      "title": "Example product title",
+    },
     "collection_title": "Your collection's name"
   },
   "products": {
     "product": {
+      "view_details": "View details",
       "add_to_cart": "Add to cart",
       "choose_options": "Choose options",
       "choose_product_options": "Choose options for {{ product_name }}",
@@ -302,6 +306,10 @@
     },
     "page": {
       "title": "Page title"
+    },
+    "collection": {
+      "colors_single": "1 color available",
+      "colors_count": "{{ count }} colors available"
     }
   },
   "localization": {
