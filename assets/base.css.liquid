@@ -1,5 +1,26 @@
 /* Color custom properties */
 
+@font-face {
+  font-family: 'Source Serif Bold';
+  src: url('{{ "SourceSerifPro-Bold.otf" | asset_url }}') format('opentype');
+  font-weight: normal; /* Specify weights if needed */
+  font-style: normal; /* Specify style if needed */
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('{{ "Poppins-Regular.ttf" | asset_url }}') format('opentype');
+  font-weight: normal; /* Specify weights if needed */
+  font-style: normal; /* Specify style if needed */
+}
+
+@font-face {
+  font-family: 'Bebas';
+  src: url('{{ "BebasNeue-Regular.ttf" | asset_url }}') format('opentype');
+  font-weight: normal; /* Specify weights if needed */
+  font-style: normal; /* Specify style if needed */
+}
+
 :root,
 .color-background-1 {
   --color-foreground: var(--color-base-text);
@@ -452,18 +473,6 @@ h1,
   }
 }
 
-h2,
-.h2 {
-  font-size: calc(var(--font-heading-scale) * 2rem);
-}
-
-@media only screen and (min-width: 750px) {
-  h2,
-  .h2 {
-    font-size: calc(var(--font-heading-scale) * 2.4rem);
-  }
-}
-
 h3,
 .h3 {
   font-size: calc(var(--font-heading-scale) * 1.7rem);
@@ -639,7 +648,6 @@ h6:empty {
   color: rgb(var(--color-link));
   background-color: transparent;
   font-size: 1.4rem;
-  font-family: inherit;
 }
 
 .link--text {
