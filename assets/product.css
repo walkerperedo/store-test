@@ -30,6 +30,25 @@
 	}
 }
 
+.card__media.has-hover-image:hover .card__main-image {
+	visibility: hidden;
+	transition: opacity 0.5s, visibility 0s 0.5s !important;
+	opacity: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.card__main-image, .card__media.has-hover-image:hover .card__hover-image {
+		visibility: visible;
+		transition: opacity 0.5s, visibility 0s;
+		opacity: 1;
+	}
+	.card__hover-image, .card__media.has-hover-image:hover .card__main-image {
+		visibility: hidden;
+		transition: opacity 0.5s, visibility 0s 0.5s;
+		opacity: 0;
+	}
+}
+
 .opt-label {
 	margin-top: 6.6px;
 	margin-inline-end: 6.6px;

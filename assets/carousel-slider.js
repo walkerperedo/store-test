@@ -68,8 +68,7 @@ class CarouselSlider extends HTMLElement {
         this.slidesPerPage = Math.round(
           (this.gridWidth + this.slideGap) / this.slideSpan
         );
-        this.slidesToScroll =
-          window.theme.settings.sliderItemsPerNav === "page" ? this.slidesPerPage : 1;
+        this.slidesToScroll = this.slidesPerPage
         this.totalPages = this.slides.length - this.slidesPerPage + 1;
   
         this.setCarouselState(this.totalPages > 1);
