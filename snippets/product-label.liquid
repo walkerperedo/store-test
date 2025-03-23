@@ -18,7 +18,7 @@
     {%- if label_count < limit and settings.show_custom_label -%}
       {%- assign label_count = label_count | plus: 1 -%}
       <div class="product-label-wrapper flex{% if settings.product_label_card_position contains "end" %} justify-end{% endif %} border border-black rounded-[100px] w-32 bg-white mt-4 ml-4">
-        <span class="product-label product-label--custom text-[10px] m-auto uppercase">
+        <span class="product-label product-label--custom text-[10px] m-auto uppercase font-[Bebas]">
           {% if settings.custom_label_icon != "none" %}
             {% render 'icon', icon: settings.custom_label_icon, width: 14, height: 14 %}
           {% endif %}
@@ -106,7 +106,7 @@
         -%}
         {%- if sale_label_text -%}
           <div class="product-label-wrapper flex{% if settings.product_label_card_position contains "end" %} justify-end{% endif %} border border-black rounded-[100px] w-32 bg-[#5C7962] mt-4 mr-4">
-            <span class="product-label product-label--sale text-[10px] m-auto uppercase text-white">
+            <span class="product-label product-label--sale text-[10px] m-auto uppercase text-white font-[Bebas]">
               {% if settings.sale_label_icon != "none" %}
                 {% render 'icon', icon: settings.sale_label_icon, width: 14, height: 14 %}
               {% endif %}

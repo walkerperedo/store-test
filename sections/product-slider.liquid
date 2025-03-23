@@ -136,23 +136,23 @@
   <script src="{{ 'carousel-slider.js' | asset_url }}" defer="defer"></script>
 {% endif %}
 
-<div class="section">
+<div class="ml-[7.1%] ">
   {%- if section.settings.title != blank or section.settings.show_view_all -%}
     <div class="relative">
       <div
-        class="section__header items-center flex{% if section.settings.heading_align == 'text-center' %} flex-col text-center{% elsif section.settings.heading_align == 'text-end' %} flex-row-reverse flex-wrap{% else %} flex-row flex-wrap{% endif %} gap-x-theme"
+        class="section__header items-center mb-18 flex{% if section.settings.heading_align == 'text-center' %} flex-col text-center{% elsif section.settings.heading_align == 'text-end' %} flex-row-reverse flex-wrap{% else %} flex-row flex-wrap{% endif %} gap-x-theme mr-[8%]"
         {% if settings.animations_enabled != 'disabled' %}
           data-cc-animate
         {% endif %}
       >
         {%- if section.settings.title != blank -%}
-          <h2 class="h4 mb-0 flex-auto section__heading {{ section.settings.heading_align }}">
+          <h2 class="mb-0 flex-auto section__heading {{ section.settings.heading_align }} text-[40px]">
             {{- section.settings.title | escape -}}
           </h2>
         {%- endif -%}
 
         {%- if section.settings.show_view_all -%}
-          <a href="{{ collection.url }}" class="link">{{ 'sections.featured_collection.view_all' | t }}</a>
+          <a href="{{ collection.url }}" class="text-[14px] text-[#5C553A] font-[Poppins] flex gap-[10px]">{{ 'sections.featured_collection.view_all' | t }} {% render "icon-arrow" %}</a>
         {%- endif -%}
 
         <div class="mobile-slider-nav">
@@ -226,6 +226,9 @@
         {%- endfor -%}
       {%- endfor -%}
     </ul>
+    <div class="scrollbar">
+      <div class="thumb"></div>
+    </div>
   </div>
 
   {%- if carousel -%}
@@ -258,10 +261,6 @@
     </div>
     </carousel-slider>
   {%- endif -%}
-  {%- if section.settings.show_promo_info -%}
-    </div>
-    </div>
-  {%- endif -%}
 </div>
 
 {% schema %}
@@ -278,7 +277,7 @@
       "type": "text",
       "id": "title",
       "label": "Heading",
-      "default": "Featured collection"
+      "default": "Best Sellers"
     },
     {
       "type": "select",

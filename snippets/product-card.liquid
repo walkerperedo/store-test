@@ -71,7 +71,7 @@
     if settings.prod_card_image_fit == 'contain'
       assign class = 'img-fit img-fit--contain card__main-image'
     else
-      assign class = 'img-fit card__main-image ' | append: settings.prod_card_image_align
+      assign class = 'img-fit card__main-image rounded-[10px]' | append: settings.prod_card_image_align
     endif
 
     if product.featured_media.preview_image == product_images.last
@@ -96,8 +96,8 @@
       <a
         href="{{ product_url }}"
         aria-label="{{ product.title | escape }}"
-        class="media block js-prod-link"
-        style="padding-top: 100%"
+        class="media block js-prod-link rounded-[10px]"
+        style="padding-top: 100%;"
         tabindex="-1"
       >
         {%- if product.featured_media -%}
@@ -135,15 +135,10 @@
 
     <div class="card__info-container flex flex-col flex-auto relative">
       <div class="card__info w-full">
-        <div class="card__info-inner{% if settings.card_price_bottom %} flex flex-col h-full{% else %} inline-block{% endif %} w-full">
-          {%- if settings.card_show_vendor -%}
-            <p class="card__vendor{% if settings.show_dividers %} mb-1{% else %} mb-0{% endif %} text-sm text-theme-light">
-              {{- product.vendor -}}
-            </p>
-          {%- endif -%}
+        <div class="card__info-inner{% if settings.card_price_bottom %} flex flex-col h-full{% else %} inline-block{% endif %} w-full mx-4">
 
-          <p class="card__title font-bold{% if settings.show_dividers %} mb-1{% else %} mt-1 mb-0{% endif %}">
-            <a href="{{ product_url }}" class="card-link text-current js-prod-link">
+          <p class="card__title font-bold{% if settings.show_dividers %} mb-1{% else %} mt-5 mb-0{% endif %}">
+            <a href="{{ product_url }}" class="card-link js-prod-link font-[Bebas] text-[18px] tracking-[1px] text-[#1C1D1D]">
               {{- product.title | escape -}}
             </a>
           </p>

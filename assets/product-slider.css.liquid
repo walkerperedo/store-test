@@ -1,182 +1,170 @@
-@media (min-width: 769px) {
-    .featured-collection-info--carousel {
-      margin-bottom: 10px;
-    }
-    .featured-collection-info {
-      flex-basis: 280px;
-    }
-    .featured-collection-info + .container {
-      max-width: calc(100% - 280px);
-    }
-    .featured-collection-info + .carousel {
-      max-width: calc(100% - 280px);
-    }
-    .featured-collection-info + .carousel .slider {
-      width: 100%;
-      margin-inline-start: 0;
-    }
-    .featured-collection-container {
-      max-width: calc(var(--page-width, 1320px) + var(--gutter) * 2);
-      padding-inline-start: var(--gutter);
-    }
-    .featured-collection--sticky {
-      position: -webkit-sticky;
-      position: sticky;
-      top: var(--header-end-padded, 0);
-      transition: top 0.3s;
-    }
-    .featured-collection--sticky-fill {
-      min-height: var(--card--product-height, auto);
+.shopify-section.cc-featured-collection{
+  margin-right: 0px!important
+}
+
+  
+/* Custom CSS - START */
+.cc-featured-collection {
+  background-color: white;
+  padding: 80px 0px;
+  margin: 20px 12px 0px;
+  border-radius: 6px;
+  .section{
+    margin: 0;
+  }
+  .slider__grid{
+    flex-wrap: nowrap;
+    overflow: scroll;
+    overflow-y: hidden;
+    gap: 24px;
+    padding-bottom: 48px;
+    scrollbar-width: none;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .slider__grid::-webkit-scrollbar{
+    display: none;
+  }
+
+  .scrollbar {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: #DDD6D7;
+    border-radius: 5px;
+    width: 92%;
+  }
+  .scrollbar:hover{
+    height: 6px;
+  }
+  
+  .thumb {
+    height: 100%;
+    width: 100px; /* Initially set this width dynamically with JS */
+    background-color: #231F20;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+  }    
+  
+
+  .os-scrollbar-horizontal {
+    right: calc(var(--gutter) * 1) !important;
+    left: calc(var(--gutter) * 1) !important;
+  }
+}
+
+.cc-featured-collection .section__heading {
+  font-family: 'Source Serif Bold';
+}
+
+.cc-featured-collection .mobile-slider-nav {
+  display: none;
+}
+
+.cc-featured-collectiom .product-label-container {
+  left: 0!important;
+  top: -21px !important;
+}
+
+.cc-featured-collectiom .wishlist-hero-custom-button.wishlisthero-floating {
+  top: -25px !important
+}
+
+@media (min-width: 768px) {
+  .cc-featured-collection .slider__grid {
+    grid-auto-columns: calc((100% - var(--column-gap) * 3) / 4);
+  }
+
+  .cc-featured-collectiom{
+    margin: 20px calc(var(--gutter) - 7px) 0px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cc-featured-collection {
+    margin: 20px 57px 0 !important;
+  }
+  .featured-collection-info {
+    flex-basis: 350px;
+    margin-inline-end: var(--gutter-md, 32px);
+  }
+  .featured-collection-info + .container {
+    max-width: calc((100% - 350px) - var(--gutter-md, 32px));
+    padding: 0;
+  }
+  .featured-collection-info + .carousel {
+    max-width: calc((100% - 350px) - var(--gutter-md, 32px));
+  }
+  .featured-collection-container {
+    padding: 0 var(--gutter);
+  }
+}
+/* Max width tiene que ir del mayor al menor */
+
+@media (max-width: 1024px) {
+  .cc-featured-collection{
+    padding-top: 22px;
+    padding-bottom: 22px;
+    .section__header {
+      a {
+        margin-top: 23px;
+      }
     }
   }
 
-  
-  /* Custom CSS - START */
-  .cc-featured-collection {
-    background-color: white;
-    padding: 80px 0px;
-    margin: 20px 12px 0px;
-    border-radius: 6px;
-    .section{
-      margin: 0;
-    }
-    .slider__grid{
-      flex-wrap: nowrap;
-      overflow: scroll;
-      overflow-y: hidden;
-      gap: 24px;
-      padding-bottom: 48px;
-    }
-    .slider__grid::-webkit-scrollbar{
-      height: 6px !important
-    }
-    .slider__grid::-webkit-scrollbar-thumb{
-      border-radius: 10px;
-      background: black;
-    }
-    .slider__grid::-webkit-scrollbar-thumb:hover {
-      cursor: pointer;
-    }
-    .os-scrollbar-horizontal {
-      right: calc(var(--gutter) * 1) !important;
-      left: calc(var(--gutter) * 1) !important;
-    }
-  }
-  
-  .cc-featured-collection .section__heading {
-    font-size: 24px;
-    font-weight: 600;
-  }
-  
   .cc-featured-collection .mobile-slider-nav {
-    display: none;
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    right: var(--gutter);
+    bottom: 0;
+    gap: 3px
   }
   
-  .cc-featured-collectiom .product-label-container {
-    left: 0!important;
-    top: -21px !important;
+  .mobile-slider-nav .slider-nav__btn {
+    border-radius: 50% !important;
   }
-  
-  .cc-featured-collectiom .wishlist-hero-custom-button.wishlisthero-floating {
-    top: -25px !important
+  .cc-featured-collection .mobile-slider-nav .btn--primary {
+    background: #fff;
+    color: #000;
+    display: flex !important;
+    padding: 5px !important;
+    margin: 0;
   }
-  
-  @media (min-width: 768px) {
-    .cc-featured-collection .slider__grid {
-      grid-auto-columns: calc((100% - var(--column-gap) * 3) / 4);
-    }
-  
-    .cc-featured-collectiom{
-      margin: 20px calc(var(--gutter) - 7px) 0px;
-    }
+  .cc-featured-collection .mobile-slider-nav .slider-left:not(.slide-nav--inline) {
+    transform: none;
   }
-  
-  @media (min-width: 1024px) {
-    .cc-featured-collection {
-      margin: 20px 57px 0 !important;
+  .cc-featured-collection .mobile-slider-nav .slider-right:not(.slide-nav--inline) {
+    transform: none;
+  }
+  .cc-featured-collection {
+    .wishlist-hero-custom-button.wishlisthero-floating {
+      right: -16px;
     }
-    .featured-collection-products .slider__item {
-      padding: 35px 18px;
-    }
-    .featured-collection-info {
-      flex-basis: 350px;
-      margin-inline-end: var(--gutter-md, 32px);
-    }
-    .featured-collection-info + .container {
-      max-width: calc((100% - 350px) - var(--gutter-md, 32px));
-      padding: 0;
-    }
-    .featured-collection-info + .carousel {
-      max-width: calc((100% - 350px) - var(--gutter-md, 32px));
-    }
-    .featured-collection-container {
-      padding: 0 var(--gutter);
+    .card__quick-add {
+      right: -16px;
     }
   }
-  /* Max width tiene que ir del mayor al menor */
-  
-  @media (max-width: 1024px) {
-    .cc-featured-collection{
-      padding-top: 22px;
-      padding-bottom: 22px;
-      .section__header {
-        a {
-          margin-top: 23px;
-        }
-      }
-    }
-  
-    .cc-featured-collection .mobile-slider-nav {
-      display: flex;
-      gap: 10px;
-      position: absolute;
-      right: var(--gutter);
-      bottom: 0;
-      gap: 3px
-    }
-    
-    .mobile-slider-nav .slider-nav__btn {
-      border-radius: 50% !important;
-    }
-    .cc-featured-collection .mobile-slider-nav .btn--primary {
-      background: #fff;
-      color: #000;
-      display: flex !important;
-      padding: 5px !important;
-      margin: 0;
-    }
-    .cc-featured-collection .mobile-slider-nav .slider-left:not(.slide-nav--inline) {
-      transform: none;
-    }
-    .cc-featured-collection .mobile-slider-nav .slider-right:not(.slide-nav--inline) {
-      transform: none;
-    }
-    .cc-featured-collection {
-      .wishlist-hero-custom-button.wishlisthero-floating {
-        right: -16px;
-      }
-      .card__quick-add {
-        right: -16px;
-      }
-    }
+}
+
+@media (max-width: 768.98px) {
+  .featured-collection-info {
+    margin: 0 var(--gutter) var(--gutter);
   }
-  
-  @media (max-width: 768.98px) {
-    .featured-collection-info {
-      margin: 0 var(--gutter) var(--gutter);
-    }
-  
-    .cc-featured-collection .wishlist-hero-custom-button.wishlisthero-floating {
-    }
-    .cc-featured-collection .product-label-wrapper .product-label{
-      padding: 4px 15px !important;
-    }
+
+  .cc-featured-collection .wishlist-hero-custom-button.wishlisthero-floating {
   }
-  @media (max-width: 425px) {
-    .cc-featured-collection .section__header h2 {
-      max-width: 323px
-    }
-    .cc-featured-collection .wishlist-hero-custom-button.wishlisthero-floating {
-    }
+  .cc-featured-collection .product-label-wrapper .product-label{
+    padding: 4px 15px !important;
   }
-  
+}
+@media (max-width: 425px) {
+  .cc-featured-collection .section__header h2 {
+    max-width: 323px
+  }
+  .cc-featured-collection .wishlist-hero-custom-button.wishlisthero-floating {
+  }
+}
