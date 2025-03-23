@@ -227,6 +227,9 @@
   .mr-4 {
     margin-right: calc(var(--spacing) * 4);
   }
+  .mr-\[7\.5\%\] {
+    margin-right: 7.5%;
+  }
   .mr-\[8\%\] {
     margin-right: 8%;
   }
@@ -272,6 +275,9 @@
   .h-\[42vw\] {
     height: 42vw;
   }
+  .h-\[45vw\] {
+    height: 45vw;
+  }
   .h-full {
     height: 100%;
   }
@@ -286,6 +292,9 @@
   }
   .w-\[42vw\] {
     width: 42vw;
+  }
+  .w-\[45vw\] {
+    width: 45vw;
   }
   .w-full {
     width: 100%;
@@ -350,11 +359,20 @@
   .justify-between {
     justify-content: space-between;
   }
+  .justify-center {
+    justify-content: center;
+  }
   .justify-end {
     justify-content: flex-end;
   }
   .gap-\[10px\] {
     gap: 10px;
+  }
+  .gap-x-\[12px\] {
+    column-gap: 12px;
+  }
+  .gap-y-\[12px\] {
+    row-gap: 12px;
   }
   .self-center {
     align-self: center;
@@ -380,17 +398,29 @@
   .border-black {
     border-color: var(--color-black);
   }
+  .bg-\[\#1C1D1D\] {
+    background-color: #1C1D1D;
+  }
   .bg-\[\#5C7962\] {
     background-color: #5C7962;
   }
   .bg-white {
     background-color: var(--color-white);
   }
+  .px-\[24px\] {
+    padding-inline: 24px;
+  }
+  .py-\[16px\] {
+    padding-block: 16px;
+  }
   .pt-3 {
     padding-top: calc(var(--spacing) * 3);
   }
   .pb-1 {
     padding-bottom: calc(var(--spacing) * 1);
+  }
+  .pb-\[12px\] {
+    padding-bottom: 12px;
   }
   .text-center {
     text-align: center;
@@ -499,6 +529,16 @@
       flex-wrap: wrap;
     }
   }
+  .md\:mr-\[0px\] {
+    @media (width >= 48rem) {
+      margin-right: 0px;
+    }
+  }
+  .md\:mr-\[7\.5\%\] {
+    @media (width >= 48rem) {
+      margin-right: 7.5%;
+    }
+  }
   .md\:block {
     @media (width >= 48rem) {
       display: block;
@@ -507,6 +547,11 @@
   .md\:flex {
     @media (width >= 48rem) {
       display: flex;
+    }
+  }
+  .md\:hidden {
+    @media (width >= 48rem) {
+      display: none;
     }
   }
   .md\:h-\[18\.5vw\] {
@@ -542,6 +587,16 @@
   .md\:flex-wrap {
     @media (width >= 48rem) {
       flex-wrap: wrap;
+    }
+  }
+  .md\:gap-\[24px\] {
+    @media (width >= 48rem) {
+      gap: 24px;
+    }
+  }
+  .md\:pb-\[52px\] {
+    @media (width >= 48rem) {
+      padding-bottom: 52px;
     }
   }
   .md\:text-start {

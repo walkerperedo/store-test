@@ -2,10 +2,11 @@ class CarouselSlider extends HTMLElement {
 	constructor() {
 		super()
 		this.slides = this.querySelectorAll('.slider__item')
-		this.container = document.querySelector('.products-grid-container')
-		this.content = document.querySelector('.slider__grid')
-		this.scrollbar = document.querySelector('.scrollbar')
-		this.thumb = document.querySelector('.thumb')
+		this.container = this.querySelector('.products-grid-container')
+		this.content = this.querySelector('.slider__grid')
+		this.scrollbar = this.querySelector('.scrollbar')
+		this.thumb = this.querySelector('.thumb')
+    this.showMoreBtn = this.querySelector(".show-more");
 		this.isDragging = false
 		this.startX
 		this.scrollLeft
@@ -14,19 +15,17 @@ class CarouselSlider extends HTMLElement {
 		window.initLazyScript(this, this.init.bind(this))
 	}
 
-	disconnectedCallback() {
-		window.removeEventListener('on:breakpoint-change', this.breakpointChangeHandler)
-	}
-
 	init() {
 		this.slider = this.querySelector('.slider')
 		this.grid = this.querySelector('.slider__grid')
 		this.rtl = document.dir === 'rtl'
-		this.breakpointChangeHandler = this.breakpointChangeHandler || this.handleBreakpointChange.bind(this)
 
 		this.initSlider()
     this.updateScrollbar();
-		window.addEventListener('on:breakpoint-change', this.breakpointChangeHandler)
+    this.hideProductsOnMobile()
+    if (this.showMoreBtn) {
+      this.showMoreBtn.addEventListener("click", () => this.toggleProducts());
+    }
 	}
 
 	initSlider() {
@@ -86,7 +85,9 @@ class CarouselSlider extends HTMLElement {
       const thumbPosition = scrollPercentage * (this.scrollbar.offsetWidth - this.thumb.offsetWidth);
       this.thumb.style.left = `${thumbPosition}px`;
     }); 
+
     window.addEventListener('resize', this.updateScrollbar);
+    window.addEventListener("resize", this.hideProductsOnMobile);
 
     this.container.addEventListener('wheel', (e) => {
       if (e.deltaX !== 0 || e.shiftKey) {
@@ -102,14 +103,6 @@ class CarouselSlider extends HTMLElement {
 		this.slider.removeEventListener('mouseup', this.mouseupHandler)
 		this.slider.removeEventListener('mouseleave', this.mouseupHandler)
 		this.slider.removeEventListener('mousemove', this.mousemoveHandler)
-	}
-
-	/**
-	 * Handles 'on:breakpoint-change' events on the window.
-	 */
-	handleBreakpointChange() {
-		this.removeListeners()
-		this.initSlider()
 	}
 
 	/**
@@ -139,11 +132,6 @@ class CarouselSlider extends HTMLElement {
 	setCarouselState(active) {
 		if (active) {
 			this.removeAttribute('inactive')
-
-			// If slider width changed when activated, reinitialise it.
-			if (this.gridWidth !== this.grid.clientWidth) {
-				this.handleBreakpointChange()
-			}
 		} else {
 			this.setAttribute('inactive', '')
 		}
@@ -196,6 +184,44 @@ class CarouselSlider extends HTMLElement {
 	handleMouseUp = () => {
 		this.isDragging = false
 	}
+
+  hideProductsOnMobile = () => {
+    if (!this.slides) return
+    if (window.outerWidth <= 767) {
+      this.isExpanded = false
+
+      this.slides.forEach((slide, index) => {
+        if (index < 4) {
+          slide.classList.add("show")
+        } else {
+          slide.classList.remove("show");
+        }
+      });
+    } else {
+      this.slides.forEach((slide) => {
+        slide.style.display = "block";
+      });
+    }
+  };
+
+  toggleProducts() {
+    if (!this.slides) return;
+
+    this.isExpanded = !this.isExpanded;
+
+    this.slides.forEach((slide, index) => {
+      if (index >= 4) {
+        if (this.isExpanded) {
+          slide.classList.add("show");
+          
+        } else {
+          slide.classList.remove("show")
+        }
+      }
+    });
+
+    this.showMoreBtn.textContent = this.isExpanded ? "Show Less" : "Show More";
+  }
 }
 
 customElements.define('carousel-slider', CarouselSlider)

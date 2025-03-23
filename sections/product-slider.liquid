@@ -109,25 +109,25 @@
 
   {%- if carousel -%}
     <carousel-slider
-      class="carousel block{% if section.settings.show_promo_info %} grow{% endif %}"
+      class="carousel block mr-[7.5%] md:mr-[0px]"
       inactive
       {% if section.settings.layout == 'carousel_on_mobile' %}
         disable-desktop="true"
       {% endif %}
     >
-      <div class="{% unless section.settings.show_promo_info %} relative{% endunless %} featured-collection-products">
+      <div class=" relative featured-collection-products">
         <div class="slider" id="slider-{{ section.id }}">
   {%- endif -%}
 
   <div class="products-grid-container shrink-0">
     <ul
-      class="{% if carousel %}slider__grid {% endif %} flex {{ grid_classes }} flex-wrap md:flex-nowrap"
+      class="{% if carousel %}slider__grid {% endif %} flex justify-between {{ grid_classes }} flex-wrap md:flex-nowrap gap-y-[12px] pb-[12px] md:pb-[52px] md:gap-[24px]"
       role="list"
     >
-      {%- for product in collection.products limit: section.settings.products_to_show -%}
+      {%- for product in collection.products-%}
         <li
           {% if carousel %}
-            class="slider__item w-[40vw] md:w-[18.5vw]"
+            class="slider__item w-[42vw] md:w-[18.5vw]"
           {% endif -%}
           {% if settings.animations_enabled != 'disabled' %}
             data-cc-animate data-cc-animate-delay="{{ forloop.index | times: 0.07 }}s"
@@ -153,6 +153,9 @@
     <div class="scrollbar hidden md:block">
       <div class="thumb"></div>
     </div>
+    <button class="bg-[#1C1D1D] text-white rounded-[100px] px-[24px] py-[16px] m-auto w-full md:hidden show-more">
+      Show more
+    </button>
   </div>
 
   {%- if carousel -%}
