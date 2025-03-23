@@ -18,15 +18,12 @@
     transition: transform 0.2s ease-in-out;
   }
   .slider__item{
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .slider__item.remove{
     opacity: 0;
     transform: translateY(-20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    height: 0px
-  }
-  .slider__item.show{
-    opacity: 1;
-    transform: translateY(0);
-    height: auto
+    height: 0;
   }
 
   .slider__grid::-webkit-scrollbar{

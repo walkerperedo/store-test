@@ -186,40 +186,30 @@ class CarouselSlider extends HTMLElement {
 	}
 
   hideProductsOnMobile = () => {
-    if (!this.slides) return
-    if (window.outerWidth <= 767) {
-      this.isExpanded = false
-
+    if (!this.slides) return;
+  
+    const isMobile = window.outerWidth <= 767;
+  
+    if (isMobile) {
+      this.isExpanded = false;
+      this.showMoreBtn.textContent = "Show More";
+  
       this.slides.forEach((slide, index) => {
-        if (index < 4) {
-          slide.classList.add("show")
-        } else {
-          slide.classList.remove("show");
-        }
+        if (index >= 4) slide.classList.add("remove");
       });
     } else {
-      this.slides.forEach((slide) => {
-        slide.style.display = "block";
-      });
+      this.slides.forEach(slide => slide.classList.remove("remove"));
     }
-  };
+  }
 
   toggleProducts() {
     if (!this.slides) return;
-
+  
     this.isExpanded = !this.isExpanded;
-
     this.slides.forEach((slide, index) => {
-      if (index >= 4) {
-        if (this.isExpanded) {
-          slide.classList.add("show");
-          
-        } else {
-          slide.classList.remove("show")
-        }
-      }
+      if (index >= 4) slide.classList.toggle("remove", !this.isExpanded);
     });
-
+  
     this.showMoreBtn.textContent = this.isExpanded ? "Show Less" : "Show More";
   }
 }
