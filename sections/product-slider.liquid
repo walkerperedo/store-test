@@ -8,17 +8,11 @@
 
 {%- liquid
   assign collection = section.settings.collection
-
-  assign carousel_desktop_small_promo = ' sm:auto-cols-3 md:auto-cols-3 lg:auto-cols-3 xl:auto-cols-4 small-cards-desktop'
-  assign carousel_desktop_medium_promo = ' sm:auto-cols-2 lg:auto-cols-3'
-  assign carousel_desktop_large_promo = ' sm:auto-cols-2'
+  
   assign carousel_desktop_small = ' md:auto-cols-4 lg:auto-cols-4 xl:auto-cols-5 small-cards-desktop'
   assign carousel_desktop_medium = ' sm:auto-cols-3 xl:auto-cols-4'
   assign carousel_desktop_large = ' sm:auto-cols-2 lg:auto-cols-3'
 
-  assign grid_desktop_small_promo = ' sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 small-cards-desktop'
-  assign grid_desktop_medium_promo = ' md:grid-cols-2 lg:grid-cols-3'
-  assign grid_desktop_large_promo = ' sm:grid-cols-2'
   assign grid_desktop_small = ' md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 small-cards-desktop'
   assign grid_desktop_medium = ' sm:grid-cols-3 xl:grid-cols-4'
   assign grid_desktop_large = ' sm:grid-cols-2 lg:grid-cols-3'
@@ -36,63 +30,21 @@
 
   if section.settings.layout == 'carousel'
     assign carousel = true
-
-    if section.settings.show_promo_info
-      if section.settings.card_size == 'small'
-        assign grid_classes = carousel_mobile_cols | append: carousel_desktop_small_promo
-      elsif section.settings.card_size == 'medium'
-        assign grid_classes = carousel_mobile_cols | append: carousel_desktop_medium_promo
-      else
-        assign grid_classes = carousel_mobile_cols | append: carousel_desktop_large_promo
-      endif
+    if section.settings.card_size == 'small'
+      assign grid_classes = carousel_mobile_cols | append: carousel_desktop_small
+    elsif section.settings.card_size == 'medium'
+      assign grid_classes = carousel_mobile_cols | append: carousel_desktop_medium
     else
-      if section.settings.card_size == 'small'
-        assign grid_classes = carousel_mobile_cols | append: carousel_desktop_small
-      elsif section.settings.card_size == 'medium'
-        assign grid_classes = carousel_mobile_cols | append: carousel_desktop_medium
-      else
-        assign grid_classes = carousel_mobile_cols | append: carousel_desktop_large
-      endif
-    endif
-  elsif section.settings.layout == 'carousel_on_mobile'
-    assign carousel = true
-
-    if section.settings.show_promo_info
-      if section.settings.card_size == 'small'
-        assign grid_classes = carousel_mobile_cols | append: grid_desktop_small_promo
-      elsif section.settings.card_size == 'medium'
-        assign grid_classes = carousel_mobile_cols | append: grid_desktop_medium_promo
-      else
-        assign grid_classes = carousel_mobile_cols | append: grid_desktop_large_promo
-      endif
-    else
-      if section.settings.card_size == 'small'
-        assign grid_classes = carousel_mobile_cols | append: grid_desktop_small
-      elsif section.settings.card_size == 'medium'
-        assign grid_classes = carousel_mobile_cols | append: grid_desktop_medium
-      else
-        assign grid_classes = carousel_mobile_cols | append: grid_desktop_large
-      endif
+      assign grid_classes = carousel_mobile_cols | append: carousel_desktop_large
     endif
   elsif section.settings.layout == 'grid'
     assign carousel = false
-
-    if section.settings.show_promo_info
-      if section.settings.card_size == 'small'
-        assign grid_classes = grid_mobile_cols | append: grid_desktop_small_promo
-      elsif section.settings.card_size == 'medium'
-        assign grid_classes = grid_mobile_cols | append: grid_desktop_medium_promo
-      else
-        assign grid_classes = grid_mobile_cols | append: grid_desktop_large_promo
-      endif
+    if section.settings.card_size == 'small'
+      assign grid_classes = grid_mobile_cols | append: grid_desktop_small
+    elsif section.settings.card_size == 'medium'
+      assign grid_classes = grid_mobile_cols | append: grid_desktop_medium
     else
-      if section.settings.card_size == 'small'
-        assign grid_classes = grid_mobile_cols | append: grid_desktop_small
-      elsif section.settings.card_size == 'medium'
-        assign grid_classes = grid_mobile_cols | append: grid_desktop_medium
-      else
-        assign grid_classes = grid_mobile_cols | append: grid_desktop_large
-      endif
+      assign grid_classes = grid_mobile_cols | append: grid_desktop_large
     endif
   endif
 
@@ -114,18 +66,9 @@
     assign image_ratio = settings.prod_card_image_ratio
   endif
 
-  assign color_scheme = section.settings.color_scheme
   assign bg_color = false
 
-  if color_scheme == 'default'
-    assign bg_color = settings.bg_color
-  elsif color_scheme == '1'
-    assign bg_color = settings.color_scheme_1_bg_grad | default: settings.color_scheme_1_bg
-  elsif color_scheme == '2'
-    assign bg_color = settings.color_scheme_2_bg_grad | default: settings.color_scheme_2_bg
-  elsif color_scheme == '3'
-    assign bg_color = settings.color_scheme_3_bg_grad | default: settings.color_scheme_3_bg
-  endif
+  assign bg_color = settings.bg_color
 
   if bg_color == settings.bg_color or bg_color == 'rgba(0,0,0,0)'
     assign bg_color = false
@@ -146,39 +89,20 @@
         {% endif %}
       >
         {%- if section.settings.title != blank -%}
-          <h2 class="mb-0 flex-auto section__heading {{ section.settings.heading_align }} text-[40px]">
+          <h2 class="mb-0 flex-auto section__heading text-center md:text-start md:{{ section.settings.heading_align }} text-[40px]">
             {{- section.settings.title | escape -}}
           </h2>
         {%- endif -%}
 
         {%- if section.settings.show_view_all -%}
-          <a href="{{ collection.url }}" class="text-[14px] text-[#5C553A] font-[Poppins] flex gap-[10px]">{{ 'sections.featured_collection.view_all' | t }} {% render "icon-arrow" %}</a>
+          <a
+            href="{{ collection.url }}"
+            class="text-[14px] text-[#5C553A] font-[Poppins] flex gap-[10px] hidden md:flex"
+          >
+            {{- 'sections.featured_collection.view_all' | t }}
+            {% render 'icon-arrow' -%}
+          </a>
         {%- endif -%}
-
-        <div class="mobile-slider-nav">
-          <div class="slider-left">
-            <button
-              type="button"
-              class="slider-nav__btn tap-target btn mobile-slider__btn {{ settings.slider_button_style }} has-ltr-icon"
-              name="prev-mobile"
-              aria-controls="slider-{{ section.id }}"
-            >
-              <span class="visually-hidden">{{ 'general.slider.previous' | t }}</span>
-              {% render 'icon-chevron-left-mini' %}
-            </button>
-          </div>
-          <div class="slider-right">
-            <button
-              type="button"
-              class="slider-nav__btn tap-target btn mobile-slider__btn {{ settings.slider_button_style }} has-ltr-icon"
-              name="next-mobile"
-              aria-controls="slider-{{ section.id }}"
-            >
-              <span class="visually-hidden">{{ 'general.slider.next' | t }}</span>
-              {% render 'icon-chevron-right-mini' %}
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   {%- endif -%}
@@ -197,13 +121,13 @@
 
   <div class="products-grid-container shrink-0">
     <ul
-      class="{% if carousel %}slider__grid {% endif %}grid {{ grid_classes }}{% if section.settings.layout == 'carousel_on_mobile' and section.settings.card_size_mobile == 'small' and settings.card_contain %} sm:gap-x-theme sm:gap-y-8{% else %} gap-x-theme gap-y-8{% endif %}{% if section.settings.card_size_mobile == 'small' and settings.card_contain %} small__grid{% endif %}"
+      class="{% if carousel %}slider__grid {% endif %} flex {{ grid_classes }} flex-wrap md:flex-nowrap"
       role="list"
     >
       {%- for product in collection.products limit: section.settings.products_to_show -%}
         <li
           {% if carousel %}
-            class="slider__item"
+            class="slider__item w-[40vw] md:w-[18.5vw]"
           {% endif -%}
           {% if settings.animations_enabled != 'disabled' %}
             data-cc-animate data-cc-animate-delay="{{ forloop.index | times: 0.07 }}s"
@@ -226,39 +150,12 @@
         {%- endfor -%}
       {%- endfor -%}
     </ul>
-    <div class="scrollbar">
+    <div class="scrollbar hidden md:block">
       <div class="thumb"></div>
     </div>
   </div>
 
   {%- if carousel -%}
-    </div>
-
-    {%- if settings.slider_show_arrows != 'never' -%}
-      <div class="slider-nav slider-right absolute top-middle end {% if settings.slider_show_arrows == 'hover' %}slider-nav--show-on-hover no-hover-hidden {% endif %}hidden md:block no-js-hidden">
-        <button
-          type="button"
-          class="slider-nav__btn tap-target btn {{ settings.slider_button_style }} has-ltr-icon"
-          name="next"
-          aria-controls="slider-{{ section.id }}"
-        >
-          <span class="visually-hidden">{{ 'general.slider.next' | t }}</span>
-          {% render 'icon-chevron-right' %}
-        </button>
-      </div>
-      <div class="slider-nav slider-left absolute top-middle end {% if settings.slider_show_arrows == 'hover' %}slider-nav--show-on-hover no-hover-hidden {% endif %}hidden md:block no-js-hidden">
-        <button
-          type="button"
-          class="slider-nav__btn tap-target btn {{ settings.slider_button_style }} has-ltr-icon"
-          name="prev"
-          aria-controls="slider-{{ section.id }}"
-        >
-          <span class="visually-hidden">{{ 'general.slider.previous' | t }}</span>
-          {% render 'icon-chevron-left' %}
-        </button>
-      </div>
-    {%- endif -%}
-    </div>
     </carousel-slider>
   {%- endif -%}
 </div>

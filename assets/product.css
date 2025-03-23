@@ -14,18 +14,12 @@
 }
 .img-container {
 	position: relative;
-	width: 355px;
-	height: 355px;
 	border-radius: 10px;
-	img {
-		border-radius: 10px;
-	}
 }
 
 .card__title {
 	a {
 		text-decoration: none;
-		color: black;
 		text-transform: uppercase;
 	}
 }

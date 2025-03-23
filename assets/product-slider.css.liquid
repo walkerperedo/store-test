@@ -13,11 +13,10 @@
     margin: 0;
   }
   .slider__grid{
-    flex-wrap: nowrap;
     overflow: scroll;
     overflow-y: hidden;
     gap: 24px;
-    padding-bottom: 48px;
+    padding-bottom: 52px;
     scrollbar-width: none;
     transition: transform 0.2s ease-in-out;
   }
@@ -28,7 +27,7 @@
 
   .scrollbar {
     position: absolute;
-    bottom: 10px;
+    bottom: 0px;
     left: 0;
     right: 0;
     height: 4px;
@@ -108,11 +107,6 @@
   .cc-featured-collection{
     padding-top: 22px;
     padding-bottom: 22px;
-    .section__header {
-      a {
-        margin-top: 23px;
-      }
-    }
   }
 
   .cc-featured-collection .mobile-slider-nav {
@@ -156,9 +150,6 @@
   }
 
   .cc-featured-collection .wishlist-hero-custom-button.wishlisthero-floating {
-  }
-  .cc-featured-collection .product-label-wrapper .product-label{
-    padding: 4px 15px !important;
   }
 }
 @media (max-width: 425px) {
