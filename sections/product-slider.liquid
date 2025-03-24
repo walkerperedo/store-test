@@ -8,16 +8,10 @@
 
 {%- liquid
   assign collection = section.settings.collection
-  if section.settings.layout == 'carousel'
-    assign carousel = true
-  elsif section.settings.layout == 'grid'
-    assign carousel = false
-  endif
+  assign carousel = true
 -%}
 
-{% if carousel %}
-  <script src="{{ 'carousel-slider.js' | asset_url }}" defer="defer"></script>
-{% endif %}
+<script src="{{ 'carousel-slider.js' | asset_url }}" defer="defer"></script>
 
 <section class="ml-[7.1%] mr-[7.1%] md:mr-[0px]">
   {%- if section.settings.title != blank or section.settings.show_view_all -%}
@@ -54,62 +48,57 @@
     </header>
   {%- endif -%}
 
-  {%- if carousel -%}
-    <carousel-slider
-      class="carousel block md:mr-[0px]"
-      inactive
-      {% if section.settings.layout == 'carousel_on_mobile' %}
-        disable-desktop="true"
-      {% endif %}
-    >
-      <div class="relative featured-collection-products">
-        <div class="slider" id="slider-{{ section.id }}">
-  {%- endif -%}
-
-  <div class="products-grid-container shrink-0">
-    <ul
-      class="{% if carousel %}slider__grid {% endif %} flex justify-between flex-wrap md:flex-nowrap gap-y-[12px] pb-[12px] md:pb-[52px] md:gap-[24px]"
-      role="list"
-    >
-      {%- for product in collection.products -%}
-        <li
-          class="{% if carousel %}slider__item w-[42vw] md:w-[18.5vw]{% endif %}"
-          {% if settings.animations_enabled != 'disabled' %}
-            data-cc-animate data-cc-animate-delay="{{ forloop.index | times: 0.07 }}s"
-          {% endif %}
-        >
-          {% render 'product-card', product: product, collection: collection %}
-        </li>
-      {%- else -%}
-        {%- for i in (1..section.settings.products_to_show) -%}
-          <li
-            class="{% if carousel %}slider__item{% endif %}"
-            {% if settings.animations_enabled != 'disabled' %}
-              data-cc-animate data-cc-animate-delay="{{ forloop.index | times: 0.07 }}s"
-            {% endif %}
+  <carousel-slider
+    class="carousel block md:mr-[0px]"
+    inactive
+    {% if section.settings.layout == 'carousel_on_mobile' %}
+      disable-desktop="true"
+    {% endif %}
+  >
+    <div class="relative featured-collection-products">
+      <div class="slider" id="slider-{{ section.id }}">
+        <div class="products-grid-container shrink-0">
+          <ul
+            class="{% if carousel %}slider__grid {% endif %} flex justify-between flex-wrap md:flex-nowrap gap-y-[12px] pb-[12px] md:pb-[52px] md:gap-[24px]"
+            role="list"
           >
-            {% render 'product-card', product: product %}
-          </li>
-        {%- endfor -%}
-      {%- endfor -%}
-    </ul>
+            {%- for product in collection.products -%}
+              <li
+                class="{% if carousel %}slider__item w-[42vw] md:w-[18.5vw]{% endif %}"
+                {% if settings.animations_enabled != 'disabled' %}
+                  data-cc-animate data-cc-animate-delay="{{ forloop.index | times: 0.07 }}s"
+                {% endif %}
+              >
+                {% render 'product-card', product: product, collection: collection %}
+              </li>
+            {%- else -%}
+              {%- for i in (1..section.settings.products_to_show) -%}
+                <li
+                  class="{% if carousel %}slider__item{% endif %}"
+                  {% if settings.animations_enabled != 'disabled' %}
+                    data-cc-animate data-cc-animate-delay="{{ forloop.index | times: 0.07 }}s"
+                  {% endif %}
+                >
+                  {% render 'product-card', product: product %}
+                </li>
+              {%- endfor -%}
+            {%- endfor -%}
+          </ul>
 
-    <div class="scrollbar hidden md:block">
-      <div class="thumb"></div>
+          <div class="scrollbar hidden md:block">
+            <div class="thumb"></div>
+          </div>
+
+          <button
+            class="bg-[#1C1D1D] text-white rounded-[100px] px-[24px] py-[16px] m-auto w-full md:hidden show-more"
+            aria-label="Show more products"
+          >
+            Show more
+          </button>
+        </div>
+      </div>
     </div>
-
-    <button
-      class="bg-[#1C1D1D] text-white rounded-[100px] px-[24px] py-[16px] m-auto w-full md:hidden show-more"
-      aria-label="Show more products"
-    >
-      Show more
-    </button>
-  </div>
-
-  {%- if carousel -%}
-    </div>
-    </carousel-slider>
-  {%- endif -%}
+  </carousel-slider>
 </section>
 
 {% schema %}
@@ -164,62 +153,6 @@
       "label": "Collection"
     },
     {
-      "type": "select",
-      "id": "layout",
-      "label": "Layout",
-      "options": [
-        {
-          "value": "carousel",
-          "label": "Carousel"
-        },
-        {
-          "value": "carousel_on_mobile",
-          "label": "Carousel on mobile"
-        },
-        {
-          "value": "grid",
-          "label": "Grid"
-        }
-      ],
-      "default": "carousel"
-    },
-    {
-      "type": "select",
-      "id": "card_size_mobile",
-      "label": "Product card size on mobile",
-      "options": [
-        {
-          "value": "small",
-          "label": "Small"
-        },
-        {
-          "value": "large",
-          "label": "Large"
-        }
-      ],
-      "default": "small"
-    },
-    {
-      "type": "select",
-      "id": "card_size",
-      "label": "Product card size on large screens",
-      "options": [
-        {
-          "value": "small",
-          "label": "Small"
-        },
-        {
-          "value": "medium",
-          "label": "Medium"
-        },
-        {
-          "value": "large",
-          "label": "Large"
-        }
-      ],
-      "default": "small"
-    },
-    {
       "type": "checkbox",
       "id": "card_show_hover_image",
       "label": "Show hover image",
@@ -232,7 +165,7 @@
       "min": 4,
       "max": 24,
       "step": 1,
-      "default": 8
+      "default": 10
     },
     {
       "type": "checkbox",
