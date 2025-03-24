@@ -108,11 +108,11 @@
 
     <section class="card__info-container flex flex-col flex-auto relative">
       <div class="card__info w-full">
-        <div class="card__info-inner{% if settings.card_price_bottom %} flex flex-col h-full{% else %} inline-block{% endif %} w-full mx-4">
+        <div class="card__info-inner{% if settings.card_price_bottom %} flex flex-col h-full{% else %} inline-block{% endif %} mx-4">
           <h5 class="card__title font-bold{% if settings.show_dividers %} mb-1{% else %} mt-5 mb-0{% endif %}">
             <a
               href="{{ product_url }}"
-              class="card-link js-prod-link font-[Bebas] text-[18px] tracking-[1px] text-[#1C1D1D]"
+              class="card-link js-prod-link font-[Bebas] text-[16px] md:text-[18px] tracking-[1px] text-[#1C1D1D]"
             >
               {{- product.title | escape -}}
             </a>

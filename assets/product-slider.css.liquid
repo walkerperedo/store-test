@@ -2,7 +2,6 @@
   margin-right: 0px!important
 }
 
-  
 /* Custom CSS - START */
 .cc-featured-collection {
   background-color: white;
@@ -46,7 +45,7 @@
   
   .thumb {
     height: 100%;
-    width: 100px; /* Initially set this width dynamically with JS */
+    width: 100px;
     background-color: #231F20;
     border-radius: 5px;
     cursor: pointer;
@@ -62,100 +61,4 @@
 
 .cc-featured-collection .section__heading {
   font-family: 'Source Serif Bold';
-}
-
-.cc-featured-collection .mobile-slider-nav {
-  display: none;
-}
-
-.cc-featured-collectiom .product-label-container {
-  left: 0!important;
-  top: -21px !important;
-}
-
-.cc-featured-collectiom .wishlist-hero-custom-button.wishlisthero-floating {
-  top: -25px !important
-}
-
-@media (min-width: 768px) {
-  .cc-featured-collection .slider__grid {
-    grid-auto-columns: calc((100% - var(--column-gap) * 3) / 4);
-  }
-
-  .cc-featured-collectiom{
-    margin: 20px calc(var(--gutter) - 7px) 0px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .cc-featured-collection {
-    margin: 20px 57px 0 !important;
-  }
-  .featured-collection-info {
-    flex-basis: 350px;
-    margin-inline-end: var(--gutter-md, 32px);
-  }
-  .featured-collection-info + .container {
-    max-width: calc((100% - 350px) - var(--gutter-md, 32px));
-    padding: 0;
-  }
-  .featured-collection-info + .carousel {
-    max-width: calc((100% - 350px) - var(--gutter-md, 32px));
-  }
-  .featured-collection-container {
-    padding: 0 var(--gutter);
-  }
-}
-/* Max width tiene que ir del mayor al menor */
-
-@media (max-width: 1024px) {
-  .cc-featured-collection{
-    padding-top: 22px;
-    padding-bottom: 22px;
-  }
-
-  .cc-featured-collection .mobile-slider-nav {
-    display: flex;
-    gap: 10px;
-    position: absolute;
-    right: var(--gutter);
-    bottom: 0;
-    gap: 3px
-  }
-  
-  .mobile-slider-nav .slider-nav__btn {
-    border-radius: 50% !important;
-  }
-  .cc-featured-collection .mobile-slider-nav .btn--primary {
-    background: #fff;
-    color: #000;
-    display: flex !important;
-    padding: 5px !important;
-    margin: 0;
-  }
-  .cc-featured-collection .mobile-slider-nav .slider-left:not(.slide-nav--inline) {
-    transform: none;
-  }
-  .cc-featured-collection .mobile-slider-nav .slider-right:not(.slide-nav--inline) {
-    transform: none;
-  }
-  .cc-featured-collection {
-    .wishlist-hero-custom-button.wishlisthero-floating {
-      right: -16px;
-    }
-    .card__quick-add {
-      right: -16px;
-    }
-  }
-}
-
-@media (max-width: 768.98px) {
-  .featured-collection-info {
-    margin: 0 var(--gutter) var(--gutter);
-  }
-
-}
-@media (max-width: 425px) {
-  .cc-featured-collection .section__header h2 {
-    max-width: 323px
 }
