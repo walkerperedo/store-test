@@ -217,6 +217,7 @@
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'main.js' | asset_url }}" defer="defer"></script>
 
     {%- unless settings.type_body_font.system? -%}
       <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
@@ -234,6 +235,7 @@
       document.documentElement.classList.add('shopify-design-mode');
     }
     </script>
+    {{"tailwind.output.css" |  asset_url | stylesheet_tag}}
   </head>
 
   <body class="gradient">
@@ -247,7 +249,7 @@
 
     {% section 'announcement-bar' %}
     {% section 'header' %}
-    <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+    <main id="MainContent" class="content-for-layout focus-none bg-white" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
 
@@ -290,6 +292,20 @@
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+    <script>
+      window.theme = {
+        mediaQueries: {
+          sm: '(min-width: 600px)',
+          md: '(min-width: 769px)',
+          customLg: '(min-width: 1024px)',
+          lg: '(min-width: 1025px)',
+          xl: '(min-width: 1280px)',
+          xxl: '(min-width: 1536px)',
+          portrait: '(orientation: portrait)'
+        },
+      };
+
+    </script>
   <!-- subify Snippet Start -->
 {% if content_for_header contains 'https:\/\/app-subify.shopgram.app\/subify-script-tag-for-snippet.js' %} 
 

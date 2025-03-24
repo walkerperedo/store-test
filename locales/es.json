@@ -118,6 +118,8 @@
       "description": "Descripción",
       "on_sale": "Oferta",
       "product_variants": "Variantes de producto",
+      "percent_reduction": "{{ amount }}% off",
+      "percent_reduction_up_to": "Save {{ amount }}%",
       "quantity": {
         "label": "Cantidad",
         "input_label": "Cantidad para {{ product }}",
@@ -279,12 +281,12 @@
       "payment": "Formas de pago"
     },
     "featured_blog": {
-      "view_all": "Ver todo",
+      "view_all": "Shop all best sellers",
       "onboarding_title": "Artículo de blog",
       "onboarding_content": "Ofrece a tus clientes un resumen de tu artículo de blog"
     },
     "featured_collection": {
-      "view_all": "Ver todo",
+      "view_all": "Shop All Best Sellers",
       "view_all_label": "Ver todos los productos de la colección {{ collection_name }}"
     },
     "collection_list": {

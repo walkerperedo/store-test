@@ -1,0 +1,30 @@
+{
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.0.15",
+    "concurrently": "^9.1.2",
+    "tailwindcss": "^4.0.15",
+    "vite": "^6.2.2"
+  },
+  "name": "prueba-tecnica",
+  "version": "1.0.0",
+  "main": "postcss.config.js",
+  "scripts": {
+    "dev": "concurrently \"shopify theme dev -s deliverydatetesttech\" \"npx @tailwindcss/cli -i ./tailwind.input.css -o ./assets/tailwind.output.css --watch\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/walkerperedo/platter-interview.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/walkerperedo/platter-interview/issues"
+  },
+  "homepage": "https://github.com/walkerperedo/platter-interview#readme",
+  "description": "",
+  "dependencies": {
+    "prueba-tecnica": "file:"
+  }
+}

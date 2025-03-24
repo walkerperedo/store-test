@@ -1,0 +1,322 @@
+{%- comment -%}theme-check-disable LiquidTag{%- endcomment -%}
+{%- comment -%}
+  Parameters:
+  - product {Object} - Product object.
+  - collection {Object} - Collection object (optional).
+  - image_ratio {Number} - Aspect ratio for the image(s).
+  - disable_quickbuy {Boolean} - Force disables quickbuy (even if enabled in settings)
+
+  Usage:
+  {% render 'product-card', product: product %}
+{%- endcomment -%}
+
+{%- liquid
+  if collection and settings.card_url_within_coll and product.collections contains collection
+    assign product_url = product.url | within: collection
+  else
+    assign product_url = product.url
+  endif
+
+  if product_url contains '?'
+    assign product_url = product_url | split: '?' | first
+  endif
+
+  assign current_variant = product.selected_or_first_available_variant
+  assign product_images = product.media | where: 'media_type', 'image'
+  assign show_hover_image = true
+
+  if section.settings.card_show_hover_image and product_images.size > 1
+    assign show_hover_image = true
+
+    if product_images.size >= product.featured_media.position
+      assign hover_image = product_images[product.featured_media.position]
+    else
+      assign hover_image = product_images[0]
+    endif
+  else
+    assign show_hover_image = false
+  endif
+
+  if image_ratio == null
+    if settings.prod_card_image_ratio == 'shortest' or settings.prod_card_image_ratio == 'tallest'
+      assign image_ratio = 1
+    else
+      assign image_ratio = settings.prod_card_image_ratio
+    endif
+  elsif image_ratio == 0 or image_ratio == 99
+    assign image_ratio = 1
+  endif
+
+  if section.settings.card_size == 'small'
+    assign swatch_limit = 4
+  else
+    assign swatch_limit = 7
+  endif
+
+  if product.featured_media
+    if section.settings.card_size == 'small'
+      capture sizes
+        render 'sizes-attribute', grid: true, min: 2, sm: 3, md: 4, xl: 5
+      endcapture
+    elsif section.settings.card_size == 'large'
+      capture sizes
+        render 'sizes-attribute', grid: true, min: 1, sm: 2, xl: 3
+      endcapture
+    else
+      capture sizes
+        render 'sizes-attribute', grid: true, min: 1, sm: 3, md: 4
+      endcapture
+    endif
+
+    if settings.prod_card_image_fit == 'contain'
+      assign class = 'img-fit img-fit--contain card__main-image'
+    else
+      assign class = 'img-fit card__main-image rounded-[10px]' | append: settings.prod_card_image_align
+    endif
+
+    if product.featured_media.preview_image == product_images.last
+      assign show_hover_image = false
+    endif
+  endif
+
+  assign image_quality = 1
+-%}
+
+<script src="{{ 'product-card.js' | asset_url }}" defer="defer"></script>
+
+{%- if product and product != empty -%}
+  <product-card class="card card--product{{ card_class }} h-full{% if settings.card_contain %} card--product-contained{% endif %}{% unless settings.show_dividers %} card--no-lines{% endunless %}{% if show_compare %} card--product-compare{% endif %} relative flex">
+    
+    {%- liquid
+      if settings.product_label_card_position != 'none'
+        render 'product-label', product: product, position: settings.product_label_card_position, is_product_card: true, limit: 2, custom_text: "Best Seller"
+      endif
+    -%}
+    <div class="img-container card__media{% if show_hover_image %} has-hover-image{% endif %} w-[42vw] h-[42vw] md:w-[18.5vw] md:h-[18.5vw]">
+      <a
+        href="{{ product_url }}"
+        aria-label="{{ product.title | escape }}"
+        class="media block js-prod-link rounded-[10px]"
+        style="padding-top: 100%;"
+        tabindex="-1"
+      >
+        {%- if product.featured_media -%}
+          {%- capture attributes %}data-media-id="{{ product.featured_media.id }}"{% endcapture -%}
+          {% render 'image',
+            image: product.featured_media.preview_image,
+            widths: '320, 460, 600, 700, 800, 900, 1200',
+            src_width: 460,
+            src_placeholder: true,
+            sizes: sizes,
+            class: class,
+            attributes: attributes,
+            disable_focal_point: true,
+            quality: image_quality
+          %}
+
+          {%- if show_hover_image -%}
+            {%- assign class = class | replace: 'card__main-image', 'card__hover-image' -%}
+            {% render 'image',
+              image: hover_image,
+              widths: '320, 460, 600, 700, 800, 900, 1200',
+              src_width: 460,
+              src_placeholder: true,
+              sizes: sizes,
+              class: class,
+              disable_focal_point: true,
+              quality: image_quality
+            %}
+          {%- endif -%}
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'media__placeholder img-fit' }}
+        {%- endif -%}
+      </a>
+    </div>
+
+    <div class="card__info-container flex flex-col flex-auto relative">
+      <div class="card__info w-full">
+        <div class="card__info-inner{% if settings.card_price_bottom %} flex flex-col h-full{% else %} inline-block{% endif %} w-full mx-4">
+
+          <p class="card__title font-bold{% if settings.show_dividers %} mb-1{% else %} mt-5 mb-0{% endif %}">
+            <a href="{{ product_url }}" class="card-link js-prod-link font-[Bebas] text-[18px] tracking-[1px] text-[#1C1D1D]">
+              {{- product.title | escape -}}
+            </a>
+          </p>
+
+          {%- if section.settings.card_show_rating -%}
+            <div>
+              {% render 'rating',
+                rating_value: 4.5,
+                rating_count: 500
+              %}
+            </div>
+          {%- endif -%}
+
+          {%- if settings.card_colors_style != 'none' -%}
+            {%- for option in product.options_with_values -%}
+              {%- if settings.swatch_option_name contains option.name -%}
+                {%- if settings.card_colors_style == 'swatches' or settings.card_colors_style == 'variant-images' -%}
+                  {%- liquid
+                    assign swatch_size = settings.card_swatch_size | times: 2
+                    if settings.image_quality == 0.75
+                      assign swatch_size = settings.card_swatch_size
+                    endif
+                  -%}
+                  <div class="card__swatches{% if settings.show_dividers %} mt-3 border-top{% else %} mt-2 pb-1{% endif %} pt-3 flex items-start relative">
+                    {%- capture option_id %}{{ section.id }}-{{ product.id }}-{{ option.name | handle }}{% endcapture -%}
+                    {%- assign variant_key = 'option' | append: option.position -%}
+
+                    {%- for value in option.values limit: swatch_limit -%}
+                      {%- liquid
+                        assign variant_value = product.variants | where: variant_key, value | first
+                        if option.selected_value == value
+                          assign selected_color = value
+                        endif
+                      -%}
+                      <input
+                        type="radio"
+                        class="opt-btn visually-hidden js-option"
+                        name="{{ option_id }}-option"
+                        id="{{ option_id }}-opt-{{ forloop.index0 }}"
+                        value="{{ value | escape }}"
+                        data-variant-id="{{ variant_value.id }}"
+                        {% if variant_value.featured_media %}
+                          data-media-id="{{ variant_value.featured_media.id }}"
+                        {% endif -%}
+                        {% if option.selected_value == value %}
+                          checked
+                        {% endif %}
+                      >
+                      <label
+                        class="opt-label opt-label--swatch relative swatch-shape--{{ settings.card_swatch_shape }}{% if settings.card_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}{% if settings.card_colors_style == 'variant-images' and variant_value.featured_media %} swatch--variant-image{% endif %}"
+                        title="{{ value | replace: '"', '`' }}"
+                        data-swatch="{% if settings.card_colors_style != 'variant-images' or variant_value.featured_media == blank %}{{ value | replace: '"', '' | downcase }}{% endif %}"
+                        for="{{ option_id }}-opt-{{ forloop.index0 }}"
+                      >
+                        {%- if settings.card_colors_style == 'variant-images' and variant_value.featured_media -%}
+                          {%- if settings.card_swatch_shape == 'natural' -%}
+                            <img
+                              loading="lazy"
+                              class="bg-theme-bg"
+                              src="{{ variant_value.featured_media.preview_image | image_url: width: swatch_size }}"
+                              height="{{ swatch_size | divided_by: variant_value.featured_media.preview_image.aspect_ratio | round }}"
+                              width="{{ swatch_size }}"
+                              alt="{{ variant_value.featured_media.preview_image.alt | escape }}"
+                            >
+                          {%- else -%}
+                            <img
+                              loading="lazy"
+                              class="img-fit bg-theme-bg"
+                              src="{{ variant_value.featured_media.preview_image | image_url: width: swatch_size, height: swatch_size, crop: 'center' }}"
+                              height="{{ swatch_size }}"
+                              width="{{ swatch_size }}"
+                              alt="{{ variant_value.featured_media.preview_image.alt | escape }}"
+                            >
+                          {%- endif -%}
+                        {%- endif -%}
+                        <span class="visually-hidden">{{ value }}</span>
+                      </label>
+                    {%- endfor -%}
+
+                    {%- if option.values.size > swatch_limit -%}
+                      <span class="self-center text-end text-sm">+{{ option.values.size | minus: swatch_limit }}</span>
+                    {%- endif -%}
+                  </div>
+                {%- else -%}
+                  {%- if option.values.size == 1 -%}
+                    <p class="mt-2">{{ 'sections.collection.colors_single' | t }}</p>
+                  {%- else -%}
+                    <p class="mt-2">{{ 'sections.collection.colors_count' | t: count: option.values.size }}</p>
+                  {%- endif -%}
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+
+          {%- if settings.card_show_inventory and current_variant.inventory_management != blank -%}
+            {%- liquid
+              assign total = 0
+              assign inventory_policy = ''
+              for variant in product.variants
+                if variant.inventory_quantity > 0
+                  assign total = total | plus: variant.inventory_quantity
+                endif
+                if variant.inventory_policy == 'continue'
+                  assign inventory_policy = 'continue'
+                endif
+              endfor
+
+              if total <= 0
+                if inventory_policy == 'continue'
+                  if settings.hide_no_stock_backordered
+                    assign inventory_level = 'hide'
+                  else
+                    assign inventory_level = 'backordered'
+                  endif
+                elsif product.available
+                  assign inventory_level = 'in_stock'
+                else
+                  assign inventory_level = 'hide'
+                endif
+              elsif total <= settings.inventory_threshold_very_low
+                assign inventory_level = 'very_low'
+              elsif total <= settings.inventory_threshold_low
+                assign inventory_level = 'low'
+              else
+                assign inventory_level = 'normal'
+              endif
+
+              if inventory_level == 'normal' or inventory_level == 'in_stock'
+                if settings.inventory_show_notice == 'low'
+                  assign inventory_level = 'hide'
+                endif
+              endif
+            -%}
+          {%- endif -%}
+
+          {%- if section.settings.show_price == true -%}
+            <div class="flex grow items-end">
+              {%- render 'price', product: product, class: 'price--bottom' -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </product-card>
+{%- else -%}
+  <div class="card">
+    <div class="card__media">
+      <div class="media relative" style="padding-top: {{ 1 | divided_by: image_ratio | times: 100 }}%;">
+        {%- capture placeholder_name -%}product-{{ 'now' | date: '%N' | modulo: 6 | plus: 1 }}{%- endcapture -%}
+        {{ placeholder_name | placeholder_svg_tag: 'media__placeholder img-fit' }}
+      </div>
+    </div>
+    <div class="card__info">
+      <p class="card__title font-bold">{{ 'onboarding.product.title' | t }}</p>
+      <div class="card__price theme-money">
+        {%- render 'price-as-money', price: 1234 -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+<script>
+  {% comment %} document.addEventListener('DOMContentLoaded', function () {
+    if (window.customerData) {
+      const customerTags = JSON.parse(window.customerData.tags.replace(/&quot;/g, '"')); //.split(',');
+
+      // Lógica para mostrar o usar los tags en el product card
+      {% comment %} console.log(customerTags); {% endcomment %}
+
+      // Ejemplo: mostrar tags en el elemento del producto
+      const productCard = document.querySelector('.product-card');
+      if (productCard) {
+        customerTags.forEach((tag) => {
+          const tagElement = document.createElement('span');
+          tagElement.textContent = tag.trim();
+          productCard.appendChild(tagElement);
+        });
+      }
+    }
+  }); {% endcomment %}
+</script>

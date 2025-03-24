@@ -37,6 +37,7 @@
         "tiktok": "TikTok"
       }
     },
+    
     "continue_shopping": "Continue shopping",
     "pagination": {
       "label": "Pagination",
@@ -59,8 +60,8 @@
     },
     "slider": {
       "of": "of",
-      "next_slide": "Slide right",
-      "previous_slide": "Slide left",
+      "next": "Slide right",
+      "previous": "Slide left",
       "name": "Slider"
     }
   },
@@ -108,11 +109,14 @@
     }
   },
   "onboarding": {
-    "product_title": "Example product title",
+    "product": {
+      "title": "Example product title",
+    },
     "collection_title": "Your collection's name"
   },
   "products": {
     "product": {
+      "view_details": "View details",
       "add_to_cart": "Add to cart",
       "choose_options": "Choose options",
       "choose_product_options": "Choose options for {{ product_name }}",
@@ -150,8 +154,15 @@
         "sale_price": "Sale price",
         "unit_price": "Unit price"
       },
+      "percent_reduction": "{{ amount }}% off",
+      "percent_reduction_up_to": "Save {{ amount }}%",
+      "value_reduction_html": "{{ amount }} off",
+      "value_reduction_up_to_html": "Up to {{ amount }} off",
+      "sale": "Sale",
       "share": "Share this product",
       "sold_out": "Sold out",
+      "new": "New",
+      "preorder": "Preorder",
       "unavailable": "Unavailable",
       "vendor": "Vendor",
       "video_exit_message": "{{ title }} opens full screen video in same window.",
@@ -277,7 +288,7 @@
       "onboarding_content": "Give your customers a summary of your blog post"
     },
     "featured_collection": {
-      "view_all": "View all",
+      "view_all": "Shop All Best Sellers",
       "view_all_label": "View all products in the {{ collection_name }} collection"
     },
     "collection_list": {
@@ -302,6 +313,10 @@
     },
     "page": {
       "title": "Page title"
+    },
+    "collection": {
+      "colors_single": "1 color available",
+      "colors_count": "{{ count }} colors available"
     }
   },
   "localization": {

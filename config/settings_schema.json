@@ -134,6 +134,975 @@
     ]
   },
   {
+    "name": "Product labels",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Product labels are small colored words which appear over product images, either on the product card or the product page (or both)."
+      },
+      {
+        "type": "paragraph",
+        "content": "A maximum of two labels will be shown on product cards."
+      },
+      {
+        "type": "select",
+        "id": "product_label_card_position",
+        "label": "Visibility on product cards",
+        "info": "Labels will show below the image for List view cards on mobile.",
+        "options": [
+          {
+            "value": "none",
+            "label": "None"
+          },
+          {
+            "value": "top-0 start",
+            "label": "Top left"
+          },
+          {
+            "value": "top-0 end",
+            "label": "Top right"
+          },
+          {
+            "value": "bottom-0 start",
+            "label": "Bottom left"
+          }
+        ],
+        "default": "top-0 start"
+      },
+      {
+        "type": "header",
+        "content": "Sale label"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_sale_label",
+        "label": "Show \"Best seller\" label",
+        "info": "On products for which the compare-at price is set",
+        "default": true
+      },
+      {
+        "type": "color",
+        "id": "sale_label_bg_color",
+        "label": "Sale background",
+        "default": "#d52f5a"
+      },
+      {
+        "type": "color",
+        "id": "sale_label_text_color",
+        "label": "Sale text",
+        "default": "#ffffff"
+      },
+      {
+        "type": "select",
+        "id": "sale_label_icon",
+        "label": "Icon",
+        "options": [
+          {
+            "value": "none",
+            "label": "None"
+          },
+          {
+            "value": "award",
+            "label": "Award"
+          },
+          {
+            "value": "box",
+            "label": "Box"
+          },
+          {
+            "value": "briefcase",
+            "label": "Briefcase"
+          },
+          {
+            "value": "calendar",
+            "label": "Calendar"
+          },
+          {
+            "value": "chat_bubble",
+            "label": "Chat bubble"
+          },
+          {
+            "value": "check_mark",
+            "label": "Check mark"
+          },
+          {
+            "value": "clock",
+            "label": "Clock"
+          },
+          {
+            "value": "credit_card",
+            "label": "Credit card"
+          },
+          {
+            "value": "dollar_sign",
+            "label": "Dollar sign"
+          },
+          {
+            "value": "dryer",
+            "label": "Dryer"
+          },
+          {
+            "value": "email",
+            "label": "Email"
+          },
+          {
+            "value": "eye",
+            "label": "Eye"
+          },
+          {
+            "value": "feather",
+            "label": "Feather"
+          },
+          {
+            "value": "gift",
+            "label": "Gift"
+          },
+          {
+            "value": "heart",
+            "label": "Heart"
+          },
+          {
+            "value": "iron",
+            "label": "Iron"
+          },
+          {
+            "value": "leaf",
+            "label": "Leaf"
+          },
+          {
+            "value": "leather",
+            "label": "Leather"
+          },
+          {
+            "value": "lock",
+            "label": "Lock"
+          },
+          {
+            "value": "map_pin",
+            "label": "Map pin"
+          },
+          {
+            "value": "pants",
+            "label": "Pants"
+          },
+          {
+            "value": "percent",
+            "label": "Percent"
+          },
+          {
+            "value": "phone",
+            "label": "Phone"
+          },
+          {
+            "value": "plane",
+            "label": "Plane"
+          },
+          {
+            "value": "price_tag",
+            "label": "Price tag"
+          },
+          {
+            "value": "question_mark",
+            "label": "Question mark"
+          },
+          {
+            "value": "return",
+            "label": "Return"
+          },
+          {
+            "value": "ruler",
+            "label": "Ruler"
+          },
+          {
+            "value": "scissors",
+            "label": "Scissors"
+          },
+          {
+            "value": "shirt",
+            "label": "Shirt"
+          },
+          {
+            "value": "shoe",
+            "label": "Shoe"
+          },
+          {
+            "value": "silhouette",
+            "label": "Silhouette"
+          },
+          {
+            "value": "star",
+            "label": "Star"
+          },
+          {
+            "value": "truck",
+            "label": "Truck"
+          },
+          {
+            "value": "washing",
+            "label": "Washing"
+          }
+        ],
+        "default": "none"
+      },
+      {
+        "type": "select",
+        "id": "sale_label_type",
+        "label": "Sale label type",
+        "default": "percent",
+        "options": [
+          {
+            "value": "standard",
+            "label": "Simple text"
+          },
+          {
+            "value": "percent",
+            "label": "Percent off"
+          },
+          {
+            "value": "money",
+            "label": "Money off"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Sold out label"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_sold_out_label",
+        "label": "Show \"Sold out\" label",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "sold_out_label_icon",
+        "label": "Icon",
+        "options": [
+          {
+            "value": "none",
+            "label": "None"
+          },
+          {
+            "value": "award",
+            "label": "Award"
+          },
+          {
+            "value": "box",
+            "label": "Box"
+          },
+          {
+            "value": "briefcase",
+            "label": "Briefcase"
+          },
+          {
+            "value": "calendar",
+            "label": "Calendar"
+          },
+          {
+            "value": "chat_bubble",
+            "label": "Chat bubble"
+          },
+          {
+            "value": "check_mark",
+            "label": "Check mark"
+          },
+          {
+            "value": "clock",
+            "label": "Clock"
+          },
+          {
+            "value": "credit_card",
+            "label": "Credit card"
+          },
+          {
+            "value": "dollar_sign",
+            "label": "Dollar sign"
+          },
+          {
+            "value": "dryer",
+            "label": "Dryer"
+          },
+          {
+            "value": "email",
+            "label": "Email"
+          },
+          {
+            "value": "eye",
+            "label": "Eye"
+          },
+          {
+            "value": "feather",
+            "label": "Feather"
+          },
+          {
+            "value": "gift",
+            "label": "Gift"
+          },
+          {
+            "value": "heart",
+            "label": "Heart"
+          },
+          {
+            "value": "iron",
+            "label": "Iron"
+          },
+          {
+            "value": "leaf",
+            "label": "Leaf"
+          },
+          {
+            "value": "leather",
+            "label": "Leather"
+          },
+          {
+            "value": "lock",
+            "label": "Lock"
+          },
+          {
+            "value": "map_pin",
+            "label": "Map pin"
+          },
+          {
+            "value": "pants",
+            "label": "Pants"
+          },
+          {
+            "value": "percent",
+            "label": "Percent"
+          },
+          {
+            "value": "phone",
+            "label": "Phone"
+          },
+          {
+            "value": "plane",
+            "label": "Plane"
+          },
+          {
+            "value": "price_tag",
+            "label": "Price tag"
+          },
+          {
+            "value": "question_mark",
+            "label": "Question mark"
+          },
+          {
+            "value": "return",
+            "label": "Return"
+          },
+          {
+            "value": "ruler",
+            "label": "Ruler"
+          },
+          {
+            "value": "scissors",
+            "label": "Scissors"
+          },
+          {
+            "value": "shirt",
+            "label": "Shirt"
+          },
+          {
+            "value": "shoe",
+            "label": "Shoe"
+          },
+          {
+            "value": "silhouette",
+            "label": "Silhouette"
+          },
+          {
+            "value": "star",
+            "label": "Star"
+          },
+          {
+            "value": "truck",
+            "label": "Truck"
+          },
+          {
+            "value": "washing",
+            "label": "Washing"
+          }
+        ],
+        "default": "none"
+      },
+      {
+        "type": "color",
+        "id": "sold_out_label_bg_color",
+        "label": "Sold out background",
+        "default": "#555555"
+      },
+      {
+        "type": "color",
+        "id": "sold_out_label_text_color",
+        "label": "Sold out text",
+        "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "New label"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_new_label",
+        "label": "Show \"New\" label",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "new_label_icon",
+        "label": "Icon",
+        "options": [
+          {
+            "value": "none",
+            "label": "None"
+          },
+          {
+            "value": "award",
+            "label": "Award"
+          },
+          {
+            "value": "box",
+            "label": "Box"
+          },
+          {
+            "value": "briefcase",
+            "label": "Briefcase"
+          },
+          {
+            "value": "calendar",
+            "label": "Calendar"
+          },
+          {
+            "value": "chat_bubble",
+            "label": "Chat bubble"
+          },
+          {
+            "value": "check_mark",
+            "label": "Check mark"
+          },
+          {
+            "value": "clock",
+            "label": "Clock"
+          },
+          {
+            "value": "credit_card",
+            "label": "Credit card"
+          },
+          {
+            "value": "dollar_sign",
+            "label": "Dollar sign"
+          },
+          {
+            "value": "dryer",
+            "label": "Dryer"
+          },
+          {
+            "value": "email",
+            "label": "Email"
+          },
+          {
+            "value": "eye",
+            "label": "Eye"
+          },
+          {
+            "value": "feather",
+            "label": "Feather"
+          },
+          {
+            "value": "gift",
+            "label": "Gift"
+          },
+          {
+            "value": "heart",
+            "label": "Heart"
+          },
+          {
+            "value": "iron",
+            "label": "Iron"
+          },
+          {
+            "value": "leaf",
+            "label": "Leaf"
+          },
+          {
+            "value": "leather",
+            "label": "Leather"
+          },
+          {
+            "value": "lock",
+            "label": "Lock"
+          },
+          {
+            "value": "map_pin",
+            "label": "Map pin"
+          },
+          {
+            "value": "pants",
+            "label": "Pants"
+          },
+          {
+            "value": "percent",
+            "label": "Percent"
+          },
+          {
+            "value": "phone",
+            "label": "Phone"
+          },
+          {
+            "value": "plane",
+            "label": "Plane"
+          },
+          {
+            "value": "price_tag",
+            "label": "Price tag"
+          },
+          {
+            "value": "question_mark",
+            "label": "Question mark"
+          },
+          {
+            "value": "return",
+            "label": "Return"
+          },
+          {
+            "value": "ruler",
+            "label": "Ruler"
+          },
+          {
+            "value": "scissors",
+            "label": "Scissors"
+          },
+          {
+            "value": "shirt",
+            "label": "Shirt"
+          },
+          {
+            "value": "shoe",
+            "label": "Shoe"
+          },
+          {
+            "value": "silhouette",
+            "label": "Silhouette"
+          },
+          {
+            "value": "star",
+            "label": "Star"
+          },
+          {
+            "value": "truck",
+            "label": "Truck"
+          },
+          {
+            "value": "washing",
+            "label": "Washing"
+          }
+        ],
+        "default": "none"
+      },
+      {
+        "type": "color",
+        "id": "new_label_bg_color",
+        "label": "New background",
+        "default": "#212b36"
+      },
+      {
+        "type": "color",
+        "id": "new_label_text_color",
+        "label": "New text",
+        "default": "#ffffff"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_new_label_collection",
+        "label": "Show \"New\" label for products in the following collections",
+        "default": false
+      },
+      {
+        "type": "collection_list",
+        "id": "new_label_collections",
+        "label": "\"New\" collections"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_new_label_tag",
+        "label": "Show \"New\" label for products with the following tag",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "new_label_tag",
+        "label": "\"New\" tag",
+        "default": "New"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_new_label_days",
+        "label": "Show \"New\" label for products created within this many days",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "new_label_date_limit",
+        "min": 2,
+        "max": 100,
+        "step": 1,
+        "label": "Days ago created",
+        "default": 7
+      },
+      {
+        "type": "header",
+        "content": "Preorder label"
+      },
+      {
+        "type": "paragraph",
+        "content": "A product is a preorder if its template name contains the word 'preorder'. [Read more](https:\/\/cleancanvas.co.uk\/support\/enterprise\/settings\/product-labels)"
+      },
+      {
+        "type": "select",
+        "id": "preorder_label_icon",
+        "label": "Icon",
+        "options": [
+          {
+            "value": "none",
+            "label": "None"
+          },
+          {
+            "value": "award",
+            "label": "Award"
+          },
+          {
+            "value": "box",
+            "label": "Box"
+          },
+          {
+            "value": "briefcase",
+            "label": "Briefcase"
+          },
+          {
+            "value": "calendar",
+            "label": "Calendar"
+          },
+          {
+            "value": "chat_bubble",
+            "label": "Chat bubble"
+          },
+          {
+            "value": "check_mark",
+            "label": "Check mark"
+          },
+          {
+            "value": "clock",
+            "label": "Clock"
+          },
+          {
+            "value": "credit_card",
+            "label": "Credit card"
+          },
+          {
+            "value": "dollar_sign",
+            "label": "Dollar sign"
+          },
+          {
+            "value": "dryer",
+            "label": "Dryer"
+          },
+          {
+            "value": "email",
+            "label": "Email"
+          },
+          {
+            "value": "eye",
+            "label": "Eye"
+          },
+          {
+            "value": "feather",
+            "label": "Feather"
+          },
+          {
+            "value": "gift",
+            "label": "Gift"
+          },
+          {
+            "value": "heart",
+            "label": "Heart"
+          },
+          {
+            "value": "iron",
+            "label": "Iron"
+          },
+          {
+            "value": "leaf",
+            "label": "Leaf"
+          },
+          {
+            "value": "leather",
+            "label": "Leather"
+          },
+          {
+            "value": "lock",
+            "label": "Lock"
+          },
+          {
+            "value": "map_pin",
+            "label": "Map pin"
+          },
+          {
+            "value": "pants",
+            "label": "Pants"
+          },
+          {
+            "value": "percent",
+            "label": "Percent"
+          },
+          {
+            "value": "phone",
+            "label": "Phone"
+          },
+          {
+            "value": "plane",
+            "label": "Plane"
+          },
+          {
+            "value": "price_tag",
+            "label": "Price tag"
+          },
+          {
+            "value": "question_mark",
+            "label": "Question mark"
+          },
+          {
+            "value": "return",
+            "label": "Return"
+          },
+          {
+            "value": "ruler",
+            "label": "Ruler"
+          },
+          {
+            "value": "scissors",
+            "label": "Scissors"
+          },
+          {
+            "value": "shirt",
+            "label": "Shirt"
+          },
+          {
+            "value": "shoe",
+            "label": "Shoe"
+          },
+          {
+            "value": "silhouette",
+            "label": "Silhouette"
+          },
+          {
+            "value": "star",
+            "label": "Star"
+          },
+          {
+            "value": "truck",
+            "label": "Truck"
+          },
+          {
+            "value": "washing",
+            "label": "Washing"
+          }
+        ],
+        "default": "none"
+      },
+      {
+        "type": "color",
+        "id": "preorder_label_bg_color",
+        "label": "Preorder background",
+        "default": "#007E12"
+      },
+      {
+        "type": "color",
+        "id": "preorder_label_text_color",
+        "label": "Preorder text",
+        "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "Custom label"
+      },
+      {
+        "type": "paragraph",
+        "content": "For custom labels, add a product metafield with the namespace and key 'theme.label', with the 'Single line text' type. [Read more](https:\/\/cleancanvas.co.uk\/support\/enterprise\/settings\/product-labels)"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_custom_label",
+        "label": "Show custom label",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "custom_label_icon",
+        "label": "Icon",
+        "options": [
+          {
+            "value": "none",
+            "label": "None"
+          },
+          {
+            "value": "award",
+            "label": "Award"
+          },
+          {
+            "value": "box",
+            "label": "Box"
+          },
+          {
+            "value": "briefcase",
+            "label": "Briefcase"
+          },
+          {
+            "value": "calendar",
+            "label": "Calendar"
+          },
+          {
+            "value": "chat_bubble",
+            "label": "Chat bubble"
+          },
+          {
+            "value": "check_mark",
+            "label": "Check mark"
+          },
+          {
+            "value": "clock",
+            "label": "Clock"
+          },
+          {
+            "value": "credit_card",
+            "label": "Credit card"
+          },
+          {
+            "value": "dollar_sign",
+            "label": "Dollar sign"
+          },
+          {
+            "value": "dryer",
+            "label": "Dryer"
+          },
+          {
+            "value": "email",
+            "label": "Email"
+          },
+          {
+            "value": "eye",
+            "label": "Eye"
+          },
+          {
+            "value": "feather",
+            "label": "Feather"
+          },
+          {
+            "value": "gift",
+            "label": "Gift"
+          },
+          {
+            "value": "heart",
+            "label": "Heart"
+          },
+          {
+            "value": "iron",
+            "label": "Iron"
+          },
+          {
+            "value": "leaf",
+            "label": "Leaf"
+          },
+          {
+            "value": "leather",
+            "label": "Leather"
+          },
+          {
+            "value": "lock",
+            "label": "Lock"
+          },
+          {
+            "value": "map_pin",
+            "label": "Map pin"
+          },
+          {
+            "value": "pants",
+            "label": "Pants"
+          },
+          {
+            "value": "percent",
+            "label": "Percent"
+          },
+          {
+            "value": "phone",
+            "label": "Phone"
+          },
+          {
+            "value": "plane",
+            "label": "Plane"
+          },
+          {
+            "value": "price_tag",
+            "label": "Price tag"
+          },
+          {
+            "value": "question_mark",
+            "label": "Question mark"
+          },
+          {
+            "value": "return",
+            "label": "Return"
+          },
+          {
+            "value": "ruler",
+            "label": "Ruler"
+          },
+          {
+            "value": "scissors",
+            "label": "Scissors"
+          },
+          {
+            "value": "shirt",
+            "label": "Shirt"
+          },
+          {
+            "value": "shoe",
+            "label": "Shoe"
+          },
+          {
+            "value": "silhouette",
+            "label": "Silhouette"
+          },
+          {
+            "value": "star",
+            "label": "Star"
+          },
+          {
+            "value": "truck",
+            "label": "Truck"
+          },
+          {
+            "value": "washing",
+            "label": "Washing"
+          }
+        ],
+        "default": "none"
+      },
+      {
+        "type": "color",
+        "id": "custom_label_bg_color",
+        "label": "Custom background",
+        "default": "#2C7E3F"
+      },
+      {
+        "type": "color",
+        "id": "custom_label_text_color",
+        "label": "Custom text",
+        "default": "#ffffff"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.layout.name",
     "settings": [
       {

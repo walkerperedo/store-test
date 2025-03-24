@@ -1,0 +1,35 @@
+{%- comment -%}
+  Parameters:
+  - price {Price} - Price
+  - show_money_with_currency {Boolean} - Force the price to show/not show with currency. If not provided, defaults to settings.show_currency_code
+
+  Usage:
+  {%- render 'price-with-supercents', price: price -%}
+{%- endcomment -%}
+{%- liquid
+  if show_money_with_currency == null
+    assign show_money_with_currency = settings.show_currency_code
+  endif
+
+  assign money_price = price | money_without_currency
+
+  assign b_2b_price = price_b2b
+
+  if settings.superscript_decimals
+    unless shop.money_format contains 'money' or shop.money_format contains '.'
+      assign separator = '.'
+      if shop.money_format contains '{{amount_with_comma_separator}}' or shop.money_format contains '{{ amount_with_comma_separator }}'
+        assign separator = ','
+      endif
+
+      assign money_price = money_price | replace: separator, '<sup>'
+      if show_money_with_currency
+        assign money_price = money_price | replace: ' ', '</sup> '
+      else
+        assign money_price = money_price | concat: '</sup>'
+      endif
+    endunless
+  endif
+%}
+
+<p class="default-price-span" data-price="{{ money_price }}" data-price_b2b="{{ b_2b_price }}">{{ money_price }} €</p>
