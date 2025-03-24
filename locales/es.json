@@ -59,8 +59,8 @@
     },
     "slider": {
       "of": "de",
-      "next_slide": "Diapositiva a la derecha",
-      "previous_slide": "Diapositiva a la izquierda",
+      "next": "Diapositiva a la derecha",
+      "previous": "Diapositiva a la izquierda",
       "name": "Carrusel"
     }
   },
@@ -109,11 +109,14 @@
     }
   },
   "onboarding": {
-    "product_title": "Ejemplo de nombre del producto",
+    "product": {
+      "title": "Ejemplo de nombre del producto",
+    },
     "collection_title": "Nombre de tu colección"
   },
   "products": {
     "product": {
+      "view_details": "View details",
       "add_to_cart": "Agregar al carrito",
       "description": "Descripción",
       "on_sale": "Oferta",
@@ -132,8 +135,13 @@
         "sale_price": "Precio de oferta",
         "unit_price": "Precio unitario"
       },
+      "value_reduction_html": "{{ amount }} off",
+      "value_reduction_up_to_html": "Up to {{ amount }} off",
+      "sale": "Sale",
       "share": "Compartir este producto",
       "sold_out": "Agotado",
+      "new": "New",
+      "preorder": "Preorder",
       "unavailable": "No disponible",
       "vendor": "Proveedor",
       "video_exit_message": "{{ title }} abre el video en pantalla completa en la misma ventana.",
@@ -311,6 +319,10 @@
     },
     "page": {
       "title": "Título de la página"
+    },
+    "collection": {
+      "colors_single": "1 color available",
+      "colors_count": "{{ count }} colors available"
     }
   },
   "localization": {
