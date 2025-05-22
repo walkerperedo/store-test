@@ -22,6 +22,83 @@
         "card_show_rating": true
       }
     },
+    "infographic_features_aVGPFd": {
+      "type": "infographic-features",
+      "blocks": {
+        "card_VqVAHr": {
+          "type": "card",
+          "settings": {
+            "position": "left",
+            "text": "Your Benefit"
+          }
+        },
+        "card_6wABei": {
+          "type": "card",
+          "settings": {
+            "position": "left",
+            "text": "Your Benefit"
+          }
+        },
+        "card_KMPU83": {
+          "type": "card",
+          "settings": {
+            "position": "left",
+            "text": "Your Benefit"
+          }
+        },
+        "card_6AtGep": {
+          "type": "card",
+          "settings": {
+            "position": "left",
+            "text": "Your Benefit"
+          }
+        },
+        "card_xNqtaU": {
+          "type": "card",
+          "settings": {
+            "position": "left",
+            "text": "Your Benefit"
+          }
+        },
+        "card_BQUGFR": {
+          "type": "card",
+          "settings": {
+            "position": "left",
+            "text": "Your Benefit"
+          }
+        },
+        "card_qp3EUE": {
+          "type": "card",
+          "settings": {
+            "position": "left",
+            "text": "Your Benefit"
+          }
+        },
+        "card_8nUNwU": {
+          "type": "card",
+          "settings": {
+            "position": "left",
+            "text": "Your Benefit"
+          }
+        }
+      },
+      "block_order": [
+        "card_VqVAHr",
+        "card_6wABei",
+        "card_KMPU83",
+        "card_6AtGep",
+        "card_xNqtaU",
+        "card_BQUGFR",
+        "card_qp3EUE",
+        "card_8nUNwU"
+      ],
+      "name": "Infographic Features",
+      "settings": {
+        "heading": "BEST FOR?",
+        "subheading": "Aminoacids, Electrolytes, Vitamins & Minerals",
+        "overlay_text": "RECOVER. RESTORE. RECOVER. RESTORE."
+      }
+    },
     "multicolumn-0": {
       "type": "multicolumn",
       "blocks": {
@@ -430,6 +507,7 @@
   },
   "order": [
     "product_slider_nfzRMa",
+    "infographic_features_aVGPFd",
     "multicolumn-0",
     "image-with-text-0",
     "image-with-text-1",

@@ -253,11 +253,6 @@
         "disabled": true,
         "settings": {}
       },
-      "5134484470793087125": {
-        "type": "shopify://apps/vitals-all-in-one-marketing/blocks/app-embed/aeb48102-2a5a-4f39-bdbd-d8d49f4e20b8",
-        "disabled": true,
-        "settings": {}
-      },
       "10547250004735064848": {
         "type": "shopify://apps/bloky/blocks/bloky/45b61385-bbbc-4cad-a7fd-60447609fa07",
         "disabled": false,
