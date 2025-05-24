@@ -29,56 +29,106 @@
           "type": "card",
           "settings": {
             "position": "left",
-            "text": "Your Benefit"
+            "icon": "shopify://shop_images/vitamin_1.png",
+            "text": "Rich in Antioxidants"
           }
         },
         "card_6wABei": {
           "type": "card",
           "settings": {
             "position": "left",
-            "text": "Your Benefit"
+            "icon": "shopify://shop_images/diabetes_1.png",
+            "text": "Regulate Blood Sugar"
           }
         },
         "card_KMPU83": {
           "type": "card",
           "settings": {
             "position": "left",
-            "text": "Your Benefit"
+            "icon": "shopify://shop_images/kidney_2.png",
+            "text": "Kidneys Health"
           }
         },
         "card_6AtGep": {
           "type": "card",
           "settings": {
             "position": "left",
-            "text": "Your Benefit"
+            "icon": "shopify://shop_images/quality-of-life_1.png",
+            "text": "Hearth Health"
           }
         },
         "card_xNqtaU": {
           "type": "card",
           "settings": {
-            "position": "left",
-            "text": "Your Benefit"
+            "position": "right",
+            "icon": "shopify://shop_images/yoga-pose_1_b5ead4b6-aba5-41d0-a562-bc49f9effb9c.png",
+            "text": "Gym & Fitness"
           }
         },
         "card_BQUGFR": {
           "type": "card",
           "settings": {
-            "position": "left",
-            "text": "Your Benefit"
+            "position": "right",
+            "icon": "shopify://shop_images/skin_1.png",
+            "text": "Beaty & Skin Care"
           }
         },
         "card_qp3EUE": {
           "type": "card",
           "settings": {
-            "position": "left",
-            "text": "Your Benefit"
+            "position": "right",
+            "icon": "shopify://shop_images/molecule_1.png",
+            "text": "Hydration & Electrolytes"
           }
         },
         "card_8nUNwU": {
           "type": "card",
           "settings": {
-            "position": "left",
-            "text": "Your Benefit"
+            "position": "right",
+            "icon": "shopify://shop_images/coconut-palm_1_1.png",
+            "text": "100% Organic"
+          }
+        },
+        "step_NVx8h7": {
+          "type": "step",
+          "settings": {
+            "step_title": "Harvesting",
+            "step_text": "Ingredients are grown in fertile soil in central Thailand – then harvested and transferred to our facility where they are cleaned and prepared for processing"
+          }
+        },
+        "step_NRfMRd": {
+          "type": "step",
+          "settings": {
+            "step_title": "Processing",
+            "step_text": "Ingredients are grown in fertile soil in central Thailand – then harvested and transferred to our facility where they are cleaned and prepared for processing."
+          }
+        },
+        "step_Y6PjHg": {
+          "type": "step",
+          "settings": {
+            "step_title": "Bottling",
+            "step_text": "Ingredients are grown in fertile soil in central Thailand – then harvested and transferred to our facility where they are cleaned and prepared for processing."
+          }
+        },
+        "step_TFtxkM": {
+          "type": "step",
+          "settings": {
+            "step_title": "Deliver",
+            "step_text": "Ingredients are grown in fertile soil in central Thailand – then harvested and transferred to our facility where they are cleaned and prepared for processing."
+          }
+        },
+        "step_WkPanQ": {
+          "type": "step",
+          "settings": {
+            "step_title": "Freeze",
+            "step_text": "Ingredients are grown in fertile soil in central Thailand – then harvested and transferred to our facility where they are cleaned and prepared for processing."
+          }
+        },
+        "step_iw6fYt": {
+          "type": "step",
+          "settings": {
+            "step_title": "HPP",
+            "step_text": "Ingredients are grown in fertile soil in central Thailand – then harvested and transferred to our facility where they are cleaned and prepared for processing."
           }
         }
       },
@@ -90,13 +140,27 @@
         "card_xNqtaU",
         "card_BQUGFR",
         "card_qp3EUE",
-        "card_8nUNwU"
+        "card_8nUNwU",
+        "step_NVx8h7",
+        "step_NRfMRd",
+        "step_Y6PjHg",
+        "step_TFtxkM",
+        "step_WkPanQ",
+        "step_iw6fYt"
       ],
       "name": "Infographic Features",
       "settings": {
+        "center_image": "shopify://shop_images/5c6e8309c4b81d9e5071fb2e5115f0cca34d7d6d_01270f18-33e5-41b7-a14f-ec21cdd5b141.png",
+        "water_image": "shopify://shop_images/Rectangle_923.png",
         "heading": "BEST FOR?",
+        "header_icon": "shopify://shop_images/mdi_storm.png",
         "subheading": "Aminoacids, Electrolytes, Vitamins & Minerals",
-        "overlay_text": "RECOVER. RESTORE. RECOVER. RESTORE."
+        "overlay_text": "RECOVER. RESTORE.",
+        "infographic_title": "THE PROCESS",
+        "infographic_icon": "shopify://shop_images/Ra_Coconut_Illustration_2.png",
+        "infographic_text": "We prioritize having the shortest supply & manufacturing chains possible and maintaining ethical production standards.",
+        "infographic_link": "LEARN MORE",
+        "infographic_link_url": ""
       }
     },
     "multicolumn-0": {

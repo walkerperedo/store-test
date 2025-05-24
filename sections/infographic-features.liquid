@@ -1,57 +1,155 @@
-{% comment %}
-  File: sections/wellness-benefits.liquid
-{% endcomment %}
+{{ 'infographic-features.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'infographic-arc.js' | asset_url }}" defer="defer"></script>
 
 <section class="bg-white py-16">
-  <div class="container mx-auto px-4">
-    <div class="flex flex-col lg:flex-row items-center justify-center gap-12">
+  <div class="mx-auto px-4 overflow-auto">
+    {% comment %} Fit cards {% endcomment %}
+    <div class="flex flex-col lg:flex-row items-center justify-center gap-24">
       <!-- Left Cards -->
-      <div class="flex flex-col gap-4">
+      <div class="grid grid-cols-2 gap-x-9 gap-y-5">
         {% for block in section.blocks %}
           {% if block.settings.position == 'left' %}
-            <div class="bg-black text-white p-4 rounded-lg w-52 text-center shadow-md">
+            <div class="bg-black text-white p-2 rounded-xl w-52 text-center shadow-md w-[160px] h-[129px] flex flex-col justify-center">
               {% if block.settings.icon %}
-                <img src="{{ block.settings.icon | image_url: width: 40 }}" alt="Icon" class="mx-auto mb-2 w-8 h-8 object-contain" />
+                <img
+                  src="{{ block.settings.icon | image_url: width: 40 }}"
+                  alt="Icon"
+                  class="mx-auto mb-2 w-19 h-19 object-contain"
+                >
               {% endif %}
-              <p class="text-sm">{{ block.settings.text }}</p>
+              <p class="text-[15px] font-[condensed]">{{ block.settings.text }}</p>
             </div>
           {% endif %}
         {% endfor %}
       </div>
 
-      <!-- Center Image + Header -->
-      <div class="relative w-80">
-        <div class="bg-black text-white text-center p-4 rounded-t-full rounded-b-md">
-          <p class="font-semibold text-sm">{{ section.settings.heading }}</p>
-          <p class="text-xs mt-1">{{ section.settings.subheading }}</p>
-        </div>
-        <div class="relative z-10">
-          {% if section.settings.center_image %}
-            <img src="{{ section.settings.center_image | image_url: width: 400 }}" alt="Center Image" class="w-full object-cover rounded-b-md" />
-          {% endif %}
-        </div>
-        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <p class="text-pink-300 text-3xl font-semibold opacity-20 text-center leading-tight">
-            {{ section.settings.overlay_text }}
-          </p>
+      <!-- Main images container -->
+      <div
+        class="relative w-104 flex flex-col items-center justify-start rounded-br-[150px] rounded-bl-[150px] rounded-[100px] bg-[#FDE2E0] h-[610px] border-2 border-black"
+        style=""
+      >
+        <!-- Background image -->
+        {% if section.settings.water_image %}
+          <div class="absolute top-[39%] left-1/2 -translate-x-1/2 z-10 pointer-events-none">
+            <img
+              src="{{ section.settings.water_image | image_url: width: 500 }}"
+              alt="Splash"
+              class="relative"
+              style="max-width: inherit"
+            >
+          </div>
+        {% endif %}
+
+        <div class="w-full h-full overflow-hidden relative rounded-br-[150px] rounded-bl-[150px] rounded-[100px]">
+          <!-- Top label -->
+          <div class="bg-black text-white text-center p-4 z-15 w-full h-[17%]">
+            {% if section.settings.header_icon %}
+              <img
+                src="{{ section.settings.header_icon | image_url: width: 38.31 }}"
+                alt="Header Icon"
+                class="mx-auto w-14.5 h-14.5 object-contain"
+                width="38.31"
+                height="38.31"
+              >
+            {% endif %}
+            <p class="font-semibold text-[23px] font-[condensed]">{{ section.settings.heading }}</p>
+          </div>
+          <p class="text-[18px] font-[condensed] text-center p-4 text-black">{{ section.settings.subheading }}</p>
+
+          <!-- main image -->
+          <div class="relative z-15 w-full top-[-45px]">
+            {% if section.settings.center_image %}
+              <img
+                src="{{ section.settings.center_image | image_url: width: 400 }}"
+                alt="Center Image"
+                class="h-full w-full object-cover rounded-b-md"
+              >
+            {% endif %}
+          </div>
+          <!-- Text overlay -->
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-8 mt-[37px]">
+            <p class="text-[#fef2f1] text-[27px] font-[condensed] text-center leading-tight">
+              {% assign total = 8 %}
+              {% for i in (1..8) %}
+                {% assign opacity = 10 | minus: i | times: 1.0 | divided_by: total | times: 100 | round %}
+                <span style="opacity: {{ opacity | divided_by: 100.0 }}">
+                  {{ section.settings.overlay_text }}
+                </span>
+              {% endfor %}
+            </p>
+          </div>
         </div>
       </div>
 
       <!-- Right Cards -->
-      <div class="flex flex-col gap-4">
+      <div class="grid grid-cols-2 gap-x-9 gap-y-5">
         {% for block in section.blocks %}
           {% if block.settings.position == 'right' %}
-            <div class="bg-black text-white p-4 rounded-lg w-52 text-center shadow-md">
+            <div class="bg-black text-white rounded-xl w-52 text-center shadow-md w-[160px] h-[129px] flex flex-col justify-center">
               {% if block.settings.icon %}
-                <img src="{{ block.settings.icon | image_url: width: 40 }}" alt="Icon" class="mx-auto mb-2 w-8 h-8 object-contain" />
+                <img
+                  src="{{ block.settings.icon | image_url: width: 40 }}"
+                  alt="Icon"
+                  class="mx-auto mb-2 w-19 h-19 object-contain"
+                  width="40"
+                >
               {% endif %}
-              <p class="text-sm">{{ block.settings.text }}</p>
+              <p class="text-[15px] font-[condensed]">{{ block.settings.text }}</p>
             </div>
           {% endif %}
         {% endfor %}
       </div>
-
     </div>
+    {% comment %} Infographic section {% endcomment %}
+    <arc-diagram class="relative lg:top-[-90px] flex lg:inline flex-col items-center justify-center">
+      <div class="steps-container order-2">
+        {% assign counter = 0 %}
+        {% for block in section.blocks %}
+          {% if block.type == 'step' %}
+            {% assign counter = counter | plus: 1 %}
+            <div class="arc-step lg:absolute leading-tight">
+              <div class="arc-step-content  w-[261px] tracking-normal font-[condensed] step-marker relative {% if forloop.last %}border-l-0! {% endif %}" data-step="0{{counter}}." >
+                <h3 class="arc-step-title font-[condensed] text-[25px] text-[#090808]">
+                  {{ block.settings.step_title }}
+                </h3>
+                <p class="arc-step-text text-[16px] text-[#777777] mt-[9px]">{{ block.settings.step_text }}</p>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <svg class="arc-svg hidden lg:block" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+        <g id="arcGroup">
+          <path d="M 50,0 A 50,50 0 1,1 0,50" fill="none" stroke="black" stroke-width="1.5" transform-origin="50 50" transform="rotate(45)"/>
+        </g>
+      </svg>
+      <div class="lg:absolute lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 w-24 w-full lg:w-[533px] lg:h-[355px] mt-[68px] lg:mt-0">
+        <div class="text-center p-4 z-15">
+          {% if section.settings.infographic_icon %}
+            <img
+              src="{{ section.settings.infographic_icon | image_url: width: 38.31 }}"
+              alt="Header Icon"
+              class="mx-auto h-[97px] w-[66px] object-contain"
+              width="97"
+              height="66"
+            >
+          {% endif %}
+          <p class="font-normal text-[18px] font-[hahmlet] text-[#090808] mt-[14px] mb-[9px]">
+            {{ section.settings.infographic_title }}
+          </p>
+        </div>
+        <p class="font-[condensed] text-center text-[30px] lg:text-[39px] text-black lg:font-bold leading-tight text-[#090808]">
+          {{ section.settings.infographic_text }}
+        </p>
+        <a
+          href="{{ section.settings.infographic_link_url }}"
+          class="px-4 py-2 text-center flex justify-center items-center gap-5 lg:mt-[33px] mt-[18px] font-[condensed] text-[16px] text-[#090808] mb-[44px] lg:mb-[0px]"
+        >
+          {{ section.settings.infographic_link }}
+          <img src="{{'arrow.png' |  asset_img_url }}" alt="arrow" width="25" height="10">
+        </a>
+      </div>
+    </arc-diagram>
   </div>
 </section>
 
@@ -65,10 +163,20 @@
       "label": "Center Image"
     },
     {
+      "type": "image_picker",
+      "id": "water_image",
+      "label": "Water Splash Image"
+    },
+    {
       "type": "text",
       "id": "heading",
       "label": "Heading",
       "default": "BEST FOR?"
+    },
+    {
+      "type": "image_picker",
+      "id": "header_icon",
+      "label": "Header Icon"
     },
     {
       "type": "text",
@@ -80,7 +188,40 @@
       "type": "text",
       "id": "overlay_text",
       "label": "Background Overlay Text",
-      "default": "RECOVER. RESTORE. RECOVER. RESTORE."
+      "default": "RECOVER. RESTORE. RECOVER. RESTORE. RECOVER. RESTORE. RECOVER. RESTORE. RECOVER. RESTORE. RECOVER. RESTORE. RECOVER. RESTORE. RECOVER. RESTORE. "
+    },
+    {
+      "type": "header",
+      "content": "Infographic Section"
+    },
+    {
+      "type": "text",
+      "id": "infographic_title",
+      "label": "Infographic Title",
+      "default": "THE PROCESS"
+    },
+    {
+      "type": "image_picker",
+      "id": "infographic_icon",
+      "label": "Infographic Icon"
+    },
+    {
+      "type": "text",
+      "id": "infographic_text",
+      "label": "Infographic Text",
+      "default": "We prioritize having the shortest supply & manufacturing chains possible and maintaining ethical production standards."
+    },
+    {
+      "type": "text",
+      "id": "infographic_link",
+      "label": "Infographic Link Text",
+      "default": "Learn more",
+      "info": "Link to the infographic page"
+    },
+    {
+      "type": "url",
+      "id": "infographic_link_url",
+      "label": "Infographic Link URL"
     }
   ],
   "blocks": [
@@ -108,6 +249,24 @@
           "id": "text",
           "label": "Card Text",
           "default": "Your Benefit"
+        }
+      ]
+    },
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "step_title",
+          "label": "Step Title",
+          "default": "Harvesting"
+        },
+        {
+          "type": "text",
+          "id": "step_text",
+          "label": "Step Text",
+          "default": "Ingredients are grown in fertile soil in central Thailand – then harvested and transferred to our facility where they are cleaned and prepared for processing."
         }
       ]
     }
