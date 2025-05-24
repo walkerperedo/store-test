@@ -1,5 +1,5 @@
 {{ 'infographic-features.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'infographic-arc.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'infographic-arc.js' | asset_url }}" defer></script>
 
 <section class="bg-white py-16">
   <div class="mx-auto px-4 overflow-auto">
@@ -9,12 +9,15 @@
       <div class="grid grid-cols-2 gap-x-9 gap-y-5">
         {% for block in section.blocks %}
           {% if block.settings.position == 'left' %}
-            <div class="bg-black text-white p-2 rounded-xl w-52 text-center shadow-md w-[160px] h-[129px] flex flex-col justify-center">
+            <div class="bg-black text-white p-2 rounded-xl text-center shadow-md w-[160px] h-[129px] flex flex-col justify-center">
               {% if block.settings.icon %}
                 <img
                   src="{{ block.settings.icon | image_url: width: 40 }}"
-                  alt="Icon"
+                  alt="Fit Card Icon"
                   class="mx-auto mb-2 w-19 h-19 object-contain"
+                  width="19"
+                  height="19"
+                  loading="lazy"
                 >
               {% endif %}
               <p class="text-[15px] font-[condensed]">{{ block.settings.text }}</p>
@@ -26,7 +29,6 @@
       <!-- Main images container -->
       <div
         class="relative w-104 flex flex-col items-center justify-start rounded-br-[150px] rounded-bl-[150px] rounded-[100px] bg-[#FDE2E0] h-[610px] border-2 border-black"
-        style=""
       >
         <!-- Background image -->
         {% if section.settings.water_image %}
@@ -36,6 +38,9 @@
               alt="Splash"
               class="relative"
               style="max-width: inherit"
+              width="399"
+              height="301"
+              loading="lazy"
             >
           </div>
         {% endif %}
@@ -50,6 +55,8 @@
                 class="mx-auto w-14.5 h-14.5 object-contain"
                 width="38.31"
                 height="38.31"
+                loading="lazy"
+
               >
             {% endif %}
             <p class="font-semibold text-[23px] font-[condensed]">{{ section.settings.heading }}</p>
@@ -61,8 +68,12 @@
             {% if section.settings.center_image %}
               <img
                 src="{{ section.settings.center_image | image_url: width: 400 }}"
-                alt="Center Image"
-                class="h-full w-full object-cover rounded-b-md"
+                alt="Yoga Image"
+                class="h-full w-full object-cover rounded-b-md min-h-[465px]"
+                height="465"
+                width="266"
+                loading="lazy"
+
               >
             {% endif %}
           </div>
@@ -85,13 +96,16 @@
       <div class="grid grid-cols-2 gap-x-9 gap-y-5">
         {% for block in section.blocks %}
           {% if block.settings.position == 'right' %}
-            <div class="bg-black text-white rounded-xl w-52 text-center shadow-md w-[160px] h-[129px] flex flex-col justify-center">
+            <div class="bg-black text-white rounded-xl text-center shadow-md w-[160px] h-[129px] flex flex-col justify-center">
               {% if block.settings.icon %}
                 <img
                   src="{{ block.settings.icon | image_url: width: 40 }}"
-                  alt="Icon"
+                  alt="Fit Card Icon"
                   class="mx-auto mb-2 w-19 h-19 object-contain"
-                  width="40"
+                  width="19"
+                  height="19"
+                  loading="lazy"
+                  
                 >
               {% endif %}
               <p class="text-[15px] font-[condensed]">{{ block.settings.text }}</p>
@@ -132,6 +146,8 @@
               class="mx-auto h-[97px] w-[66px] object-contain"
               width="97"
               height="66"
+              loading="lazy"
+
             >
           {% endif %}
           <p class="font-normal text-[18px] font-[hahmlet] text-[#090808] mt-[14px] mb-[9px]">
@@ -146,7 +162,7 @@
           class="px-4 py-2 text-center flex justify-center items-center gap-5 lg:mt-[33px] mt-[18px] font-[condensed] text-[16px] text-[#090808] mb-[44px] lg:mb-[0px]"
         >
           {{ section.settings.infographic_link }}
-          <img src="{{'arrow.png' |  asset_img_url }}" alt="arrow" width="25" height="10">
+          <img src="{{'arrow.png' |  asset_img_url }}" alt="arrow" width="25" height="10" loading="lazy">
         </a>
       </div>
     </arc-diagram>

@@ -8,6 +8,6 @@
 	@apply before:content-[attr(data-step)] before:rounded-full before:w-[48px] before:h-[48px] before:bg-black 
            before:text-white before:flex before:items-center before:justify-center 
            before:font-bold before:text-[20px] before:absolute before:left-0 before:top-0 
-           before:block lg:before:hidden before:left-[-24px] border-l-2 text-left lg:border-l-0 
+           before:block lg:before:hidden before:left-[-24px] border-black border-l-2 text-left lg:border-l-0 
            lg:text-inherit pl-[39px] lg:pl-0 m-auto pb-[19px] lg:pb-0;
 }
