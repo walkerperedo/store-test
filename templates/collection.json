@@ -14,6 +14,7 @@
       "blocks": {
         "slide": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "image": "{{ collection.image }}",
             "heading": "{{ collection.title }}",
@@ -34,6 +35,7 @@
       "block_order": [
         "slide"
       ],
+      "disabled": true,
       "settings": {
         "layout": "full_bleed",
         "slide_height": "small",
@@ -55,6 +57,7 @@
     },
     "product-grid": {
       "type": "main-collection-product-grid",
+      "disabled": true,
       "settings": {
         "products_per_page": 24,
         "columns_desktop": 4,
