@@ -1,0 +1,35 @@
+{% comment %}
+  This section serves as the host for our React application.
+  It loads the compiled JS and CSS files and provides a root element
+  with the necessary data attributes.
+{% endcomment %}
+
+{{ 'react-app.css' | asset_url | stylesheet_tag }}
+
+<div
+  id="react-filter-app"
+  data-storefront-api-token="{{shop.metafields.custom.store_front_api_token}}"
+  data-store-url="https://{{ shop.permanent_domain }}"
+  data-collection-handle="{{ collection.handle }}"
+>
+  <p>Loading products...</p>
+</div>
+
+<script src="{{ 'react-app.js' | asset_url }}" defer="defer"></script>
+
+{% comment %}
+  Step 4: Define the schema. This makes the section visible and configurable in the
+  Shopify Theme Customizer, allowing you to easily add it to any page.
+{% endcomment %}
+{% schema %}
+{
+  "name": "React Filter Widget",
+  "tag": "section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "React Filter Widget"
+    }
+  ]
+}
+{% endschema %}
