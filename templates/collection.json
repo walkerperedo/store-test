@@ -74,6 +74,11 @@
         "padding_bottom": 60
       }
     },
+    "widget_collection_YGqFm9": {
+      "type": "widget-collection",
+      "name": "React Filter Widget",
+      "settings": {}
+    },
     "image-with-text-0": {
       "type": "image-with-text",
       "blocks": {
@@ -116,11 +121,6 @@
         "padding_top": 0,
         "padding_bottom": 60
       }
-    },
-    "widget_collection_YGqFm9": {
-      "type": "widget-collection",
-      "name": "React Filter Widget",
-      "settings": {}
     },
     "image-with-text-1": {
       "type": "image-with-text",
@@ -203,8 +203,8 @@
     "slideshow",
     "banner",
     "product-grid",
-    "image-with-text-0",
     "widget_collection_YGqFm9",
+    "image-with-text-0",
     "image-with-text-1",
     "newsletter"
   ]
